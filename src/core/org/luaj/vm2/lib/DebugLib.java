@@ -348,12 +348,13 @@ public class DebugLib extends TwoArgFunction {
 	//	debug.setuservalue (udata, value)
 	final class setuservalue extends VarArgFunction { 
 		public Varargs invoke(Varargs args) {
-			Object o = args.checkUserdata(1);
-			LuaValue v = args.checkvalue(2);
-			LuaUserdata u = (LuaUserdata) args.arg1();
-			u.instance = v.checkUserdata();
-			u.m_metatable = v.getmetatable();
-			return NONE;
+			throw new RuntimeException("setuservalue is not supported");
+//			Object o = args.checkUserdata(1);
+//			LuaValue v = args.checkvalue(2);
+//			LuaUserdata u = (LuaUserdata) args.arg1();
+//			u.instance = v.checkUserdata();
+//			u.m_metatable = v.getmetatable();
+//			return NONE;
 		}
 	}
 	
