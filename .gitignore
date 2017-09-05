@@ -5,7 +5,6 @@ lib/
 jit/
 *.ser
 *.gz
-*.jar
 *.lua
 *.out
 *.tar
