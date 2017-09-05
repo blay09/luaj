@@ -81,7 +81,7 @@
 			<pathelement path="lib/midpapi20.jar"/>
 			<pathelement path="lib/mmapi.jar"/>
 		</path>
-		<javac destdir="build/jme/classes" encoding="utf-8" source="1.3" target="1.2" bootclasspathref="wtk-libs"
+		<javac destdir="build/jme/classes" encoding="utf-8" source="1.8" target="1.8" bootclasspathref="wtk-libs"
 			srcdir="build/jme/src"/>
 		<javac destdir="build/jse/classes" encoding="utf-8" source="1.8" target="1.8"
 			classpath="lib/bcel-5.2.jar"
