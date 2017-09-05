@@ -288,15 +288,15 @@ public class IoLib extends TwoArgFunction {
 				case IO_INPUT:		return iolib._io_input(args.arg1());
 				case IO_OUTPUT:		return iolib._io_output(args.arg1());
 				case IO_TYPE:		return iolib._io_type(args.arg1());
-				case IO_POPEN:		return iolib._io_popen(args.checkjstring(1),args.optjstring(2,"r"));
-				case IO_OPEN:		return iolib._io_open(args.checkjstring(1), args.optjstring(2,"r"));
-				case IO_LINES:		return iolib._io_lines(args.isvalue(1)? args.checkjstring(1): null);
+				case IO_POPEN:		return iolib._io_popen(args.checkString(1),args.optjstring(2,"r"));
+				case IO_OPEN:		return iolib._io_open(args.checkString(1), args.optjstring(2,"r"));
+				case IO_LINES:		return iolib._io_lines(args.isvalue(1)? args.checkString(1): null);
 				case IO_READ:		return iolib._io_read(args);
 				case IO_WRITE:		return iolib._io_write(args);
 					
 				case FILE_CLOSE:	return iolib._file_close(args.arg1());
 				case FILE_FLUSH:	return iolib._file_flush(args.arg1());
-				case FILE_SETVBUF:	return iolib._file_setvbuf(args.arg1(),args.checkjstring(2),args.optint(3,1024));
+				case FILE_SETVBUF:	return iolib._file_setvbuf(args.arg1(),args.checkString(2),args.optint(3,1024));
 				case FILE_LINES:	return iolib._file_lines(args.arg1());
 				case FILE_READ:		return iolib._file_read(args.arg1(),args.subargs(2));
 				case FILE_SEEK:		return iolib._file_seek(args.arg1(),args.optjstring(2,"cur"),args.optint(3,0));
@@ -486,7 +486,7 @@ public class IoLib extends TwoArgFunction {
 
 	private static Varargs iowrite(File f, Varargs args) throws IOException {
 		for ( int i=1, n=args.narg(); i<=n; i++ )
-			f.write( args.checkstring(i) );
+			f.write( args.checkLuaString(i) );
 		return f;
 	}
 

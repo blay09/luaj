@@ -84,10 +84,10 @@ public class Bit32Lib extends TwoArgFunction {
 			case 3: return Bit32Lib.btest( args );
 			case 4: return Bit32Lib.bxor( args );
 			case 5:
-				return Bit32Lib.extract( args.checkint(1), args.checkint(2), args.optint(3, 1) );
+				return Bit32Lib.extract( args.checkInt(1), args.checkInt(2), args.optint(3, 1) );
 			case 6:
-				return Bit32Lib.replace( args.checkint(1), args.checkint(2),
-						args.checkint(3), args.optint(4, 1) );
+				return Bit32Lib.replace( args.checkInt(1), args.checkInt(2),
+						args.checkInt(3), args.optint(4, 1) );
 			}
 			return NIL;
 		}
@@ -139,19 +139,19 @@ public class Bit32Lib extends TwoArgFunction {
 	static Varargs band( Varargs args ) {
 		int result = -1;
 		for ( int i = 1; i <= args.narg(); i++ ) {
-			result &= args.checkint(i);
+			result &= args.checkInt(i);
 		}
 		return bitsToValue( result );
 	}
 
 	static Varargs bnot( Varargs args ) {
-		return bitsToValue( ~args.checkint(1) );
+		return bitsToValue( ~args.checkInt(1) );
 	}
 
 	static Varargs bor( Varargs args ) {
 		int result = 0;
 		for ( int i = 1; i <= args.narg(); i++ ) {
-			result |= args.checkint(i);
+			result |= args.checkInt(i);
 		}
 		return bitsToValue( result );
 	}
@@ -159,7 +159,7 @@ public class Bit32Lib extends TwoArgFunction {
 	static Varargs btest( Varargs args ) {
 		int bits = -1;
 		for ( int i = 1; i <= args.narg(); i++ ) {
-			bits &= args.checkint(i);
+			bits &= args.checkInt(i);
 		}
 		return valueOf( bits != 0 );
 	}
@@ -167,7 +167,7 @@ public class Bit32Lib extends TwoArgFunction {
 	static Varargs bxor( Varargs args ) {
 		int result = 0;
 		for ( int i = 1; i <= args.narg(); i++ ) {
-			result ^= args.checkint(i);
+			result ^= args.checkInt(i);
 		}
 		return bitsToValue( result );
 	}

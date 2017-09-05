@@ -147,7 +147,7 @@ public class CoerceLuaToJava {
 				case TARGET_TYPE_DOUBLE: return fromStringPenalty + 2;
 				default: return SCORE_WRONG_TYPE;
 				}
-			} else if ( value.isnumber() ) {
+			} else if ( value.isNumber() ) {
 				switch ( targetType ) {
 				case TARGET_TYPE_BYTE: return SCORE_WRONG_TYPE;
 				case TARGET_TYPE_CHAR: return SCORE_WRONG_TYPE;

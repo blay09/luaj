@@ -87,7 +87,7 @@ class JavaMethod extends JavaMember {
 	}
 	
 	public Varargs invoke(Varargs args) {
-		return invokeMethod(args.checkuserdata(1), args.subargs(2));
+		return invokeMethod(args.checkUserdata(1), args.subargs(2));
 	}
 	
 	LuaValue invokeMethod(Object instance, Varargs args) {
@@ -135,7 +135,7 @@ class JavaMethod extends JavaMember {
 		}
 		
 		public Varargs invoke(Varargs args) {
-			return invokeBestMethod(args.checkuserdata(1), args.subargs(2));
+			return invokeBestMethod(args.checkUserdata(1), args.subargs(2));
 		}
 
 		private LuaValue invokeBestMethod(Object instance, Varargs args) {

@@ -119,7 +119,7 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class byte_ extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			LuaString s = args.checkstring(1);
+			LuaString s = args.checkLuaString(1);
 			int l = s.m_length;
 			int posi = posrelat( args.optint(2,1), l );
 			int pose = posrelat( args.optint(3,posi), l );
@@ -153,7 +153,7 @@ public class StringLib extends TwoArgFunction {
 			int n = args.narg();
 			byte[] bytes = new byte[n];
 			for ( int i=0, a=1; i<n; i++, a++ ) {
-				int c = args.checkint(a);
+				int c = args.checkInt(a);
 				if (c<0 || c>=256) argerror(a, "invalid value");
 				bytes[i] = (byte) c;
 			}
@@ -172,7 +172,7 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class dump extends OneArgFunction {
 		public LuaValue call(LuaValue arg) {
-			LuaValue f = arg.checkfunction();
+			LuaValue f = arg.checkFunction();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			try {
 				DumpState.dump( ((LuaClosure)f).p, baos, true );
@@ -230,7 +230,7 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class format extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			LuaString fmt = args.checkstring( 1 );
+			LuaString fmt = args.checkLuaString( 1 );
 			final int n = fmt.length();
 			Buffer result = new Buffer(n);
 			int arg = 1;
@@ -255,11 +255,11 @@ public class StringLib extends TwoArgFunction {
 							i += fdsc.length;
 							switch ( fdsc.conversion ) {
 							case 'c':
-								fdsc.format( result, (byte)args.checkint( arg ) );
+								fdsc.format( result, (byte)args.checkInt( arg ) );
 								break;
 							case 'i':
 							case 'd':
-								fdsc.format( result, args.checkint( arg ) );
+								fdsc.format( result, args.checkInt( arg ) );
 								break;
 							case 'o':
 							case 'u':
@@ -275,10 +275,10 @@ public class StringLib extends TwoArgFunction {
 								fdsc.format( result, args.checkdouble( arg ) );
 								break;
 							case 'q':
-								addquoted( result, args.checkstring( arg ) );
+								addquoted( result, args.checkLuaString( arg ) );
 								break;
 							case 's': {
-								LuaString s = args.checkstring( arg );
+								LuaString s = args.checkLuaString( arg );
 								if ( fdsc.precision == -1 && s.length() >= 100 ) {
 									result.append( s );
 								} else {
@@ -509,8 +509,8 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class gmatch extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			LuaString src = args.checkstring( 1 );
-			LuaString pat = args.checkstring( 2 );
+			LuaString src = args.checkLuaString( 1 );
+			LuaString pat = args.checkLuaString( 2 );
 			return new GMatchAux(args, src, pat);
 		}
 	}
@@ -586,9 +586,9 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class gsub extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			LuaString src = args.checkstring( 1 );
+			LuaString src = args.checkLuaString( 1 );
 			final int srclen = src.length();
-			LuaString p = args.checkstring( 2 );
+			LuaString p = args.checkLuaString( 2 );
 			LuaValue repl = args.arg( 3 );
 			int max_s = args.optint( 4, srclen + 1 );
 			final boolean anchor = p.length() > 0 && p.charAt( 0 ) == '^';
@@ -666,8 +666,8 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class rep extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			LuaString s = args.checkstring( 1 );
-			int n = args.checkint( 2 );
+			LuaString s = args.checkLuaString( 1 );
+			int n = args.checkInt( 2 );
 			final byte[] bytes = new byte[ s.length() * n ];
 			int len = s.length();
 			for ( int offset = 0; offset < bytes.length; offset += len ) {
@@ -706,10 +706,10 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class sub extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			final LuaString s = args.checkstring( 1 );
+			final LuaString s = args.checkLuaString( 1 );
 			final int l = s.length();
 			
-			int start = posrelat( args.checkint( 2 ), l );
+			int start = posrelat( args.checkInt( 2 ), l );
 			int end = posrelat( args.optint( 3, -1 ), l );
 			
 			if ( start < 1 )
@@ -742,8 +742,8 @@ public class StringLib extends TwoArgFunction {
 	 * This utility method implements both string.find and string.match.
 	 */
 	static Varargs str_find_aux( Varargs args, boolean find ) {
-		LuaString s = args.checkstring( 1 );
-		LuaString pat = args.checkstring( 2 );
+		LuaString s = args.checkLuaString( 1 );
+		LuaString pat = args.checkLuaString( 2 );
 		int init = args.optint( 3, 1 );
 		
 		if ( init > 0 ) {

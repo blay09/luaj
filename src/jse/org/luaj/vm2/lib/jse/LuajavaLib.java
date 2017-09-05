@@ -116,7 +116,7 @@ public class LuajavaLib extends VarArgFunction {
 				return t;
 			}
 			case BINDCLASS: {
-				final Class clazz = classForName(args.checkjstring(1));
+				final Class clazz = classForName(args.checkString(1));
 				return JavaClass.forClass(clazz);
 			}
 			case NEWINSTANCE:
@@ -137,7 +137,7 @@ public class LuajavaLib extends VarArgFunction {
 				// get the interfaces
 				final Class[] ifaces = new Class[niface];
 				for ( int i=0; i<niface; i++ ) 
-					ifaces[i] = classForName(args.checkjstring(i+1));
+					ifaces[i] = classForName(args.checkString(i+1));
 				
 				// create the invocation handler
 				InvocationHandler handler = new ProxyInvocationHandler(lobj);
@@ -150,8 +150,8 @@ public class LuajavaLib extends VarArgFunction {
 			}
 			case LOADLIB: {
 				// get constructor
-				String classname = args.checkjstring(1);
-				String methodname = args.checkjstring(2);
+				String classname = args.checkString(1);
+				String methodname = args.checkString(2);
 				Class clazz = classForName(classname);
 				Method method = clazz.getMethod(methodname, new Class[] {});
 				Object result = method.invoke(clazz, new Object[] {});

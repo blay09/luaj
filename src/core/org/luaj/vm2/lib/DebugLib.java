@@ -169,12 +169,12 @@ public class DebugLib extends TwoArgFunction {
 
 			// find the stack info
 			DebugLib.CallFrame frame;
-			if ( func.isnumber() ) {
+			if ( func.isNumber() ) {
 				frame = callstack.getCallFrame(func.toint());
 				if (frame == null)
 					return NONE;
 				func = frame.f;
-			} else if ( func.isfunction() ) {
+			} else if ( func.isFunction() ) {
 				frame = callstack.findCallFrame(func);
 			} else {
 				return argerror(a-2, "function or level");
@@ -226,8 +226,8 @@ public class DebugLib extends TwoArgFunction {
 		public Varargs invoke(Varargs args) {
 			int a=1;
 			LuaThread thread = args.isthread(a)? args.checkthread(a++): globals.running; 
-			int level = args.checkint(a++);
-			int local = args.checkint(a++);
+			int level = args.checkInt(a++);
+			int local = args.checkInt(a++);
 			CallFrame f = callstack(thread).getCallFrame(level);
 			return f != null? f.getLocal(local): NONE;
 		}
@@ -251,8 +251,8 @@ public class DebugLib extends TwoArgFunction {
 	//	debug.getupvalue (f, up)
 	static final class getupvalue extends VarArgFunction { 
 		public Varargs invoke(Varargs args) {
-			LuaValue func = args.checkfunction(1);
-			int up = args.checkint(2);
+			LuaValue func = args.checkFunction(1);
+			int up = args.checkInt(2);
 			if ( func instanceof LuaClosure ) {
 				LuaClosure c = (LuaClosure) func;
 				LuaString name = findupvalue(c, up);
@@ -302,8 +302,8 @@ public class DebugLib extends TwoArgFunction {
 		public Varargs invoke(Varargs args) {
 			int a=1;
 			LuaThread thread = args.isthread(a)? args.checkthread(a++): globals.running; 
-			int level = args.checkint(a++);
-			int local = args.checkint(a++);
+			int level = args.checkInt(a++);
+			int local = args.checkInt(a++);
 			LuaValue value = args.arg(a++);
 			CallFrame f = callstack(thread).getCallFrame(level); 
 			return f != null? f.setLocal(local, value): NONE;
@@ -330,8 +330,8 @@ public class DebugLib extends TwoArgFunction {
 	//	debug.setupvalue (f, up, value)
 	final class setupvalue extends VarArgFunction { 
 		public Varargs invoke(Varargs args) {
-			LuaValue func = args.checkfunction(1);
-			int up = args.checkint(2);
+			LuaValue func = args.checkFunction(1);
+			int up = args.checkInt(2);
 			LuaValue value = args.arg(3);
 			if ( func instanceof LuaClosure ) {
 				LuaClosure c = (LuaClosure) func;
@@ -348,10 +348,10 @@ public class DebugLib extends TwoArgFunction {
 	//	debug.setuservalue (udata, value)
 	final class setuservalue extends VarArgFunction { 
 		public Varargs invoke(Varargs args) {
-			Object o = args.checkuserdata(1);
+			Object o = args.checkUserdata(1);
 			LuaValue v = args.checkvalue(2);
 			LuaUserdata u = (LuaUserdata) args.arg1();
-			u.m_instance = v.checkUserdata();
+			u.instance = v.checkUserdata();
 			u.m_metatable = v.getmetatable();
 			return NONE;
 		}
@@ -372,8 +372,8 @@ public class DebugLib extends TwoArgFunction {
 	//	debug.upvalueid (f, n)
 	final class upvalueid extends VarArgFunction { 
 		public Varargs invoke(Varargs args) {
-			LuaValue func = args.checkfunction(1);
-			int up = args.checkint(2);
+			LuaValue func = args.checkFunction(1);
+			int up = args.checkInt(2);
 			if ( func instanceof LuaClosure ) {
 				LuaClosure c = (LuaClosure) func;
 				if ( c.upValues != null && up > 0 && up <= c.upValues.length ) {
@@ -388,9 +388,9 @@ public class DebugLib extends TwoArgFunction {
 	final class upvaluejoin extends VarArgFunction { 
 		public Varargs invoke(Varargs args) {
 			LuaClosure f1 = args.checkclosure(1);
-			int n1 = args.checkint(2);
+			int n1 = args.checkInt(2);
 			LuaClosure f2 = args.checkclosure(3);
-			int n2 = args.checkint(4);
+			int n2 = args.checkInt(4);
 			if (n1 < 1 || n1 > f1.upValues.length)
 				argerror("index out of range");
 			if (n2 < 1 || n2 > f2.upValues.length)

@@ -257,7 +257,7 @@ public class LuaDouble extends LuaNumber {
 		return this; 
 	}
 	
-	public boolean isnumber() {
+	public boolean isNumber() {
 		return true; 
 	}
 	

@@ -266,7 +266,7 @@ public class LuaTable extends LuaValue implements Metatable {
 
 	/** caller must ensure key is not nil */
 	public void set( LuaValue key, LuaValue value ) {
-		if (!key.isvalidkey() && !metatag(NEWINDEX).isfunction())
+		if (!key.isvalidkey() && !metatag(NEWINDEX).isFunction())
 			typerror("table index");
 		if ( m_metatable==null || ! rawget(key).isnil() ||  ! settable(this,key,value) )
 			rawset(key, value);

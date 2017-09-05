@@ -110,23 +110,23 @@ public class TypeTest extends TestCase {
 
 	
 	public void testIsFunction() {
-		assertEquals( false, somenil.isfunction() );
-		assertEquals( false, sometrue.isfunction() );
-		assertEquals( false, somefalse.isfunction() );
-		assertEquals( false, zero.isfunction() );
-		assertEquals( false, intint.isfunction() );
-		assertEquals( false, longdouble.isfunction() );
-		assertEquals( false, doubledouble.isfunction() );
-		assertEquals( false, stringstring.isfunction() );
-		assertEquals( false, stringint.isfunction() );
-		assertEquals( false, stringlong.isfunction() );
-		assertEquals( false, stringdouble.isfunction() );
-		assertEquals( false, thread.isfunction() );
-		assertEquals( false, table.isfunction() );
-		assertEquals( false, userdataobj.isfunction() );
-		assertEquals( false, userdatacls.isfunction() );
-		assertEquals( true, somefunc.isfunction() );
-		assertEquals( true, someclosure.isfunction() );
+		assertEquals( false, somenil.isFunction() );
+		assertEquals( false, sometrue.isFunction() );
+		assertEquals( false, somefalse.isFunction() );
+		assertEquals( false, zero.isFunction() );
+		assertEquals( false, intint.isFunction() );
+		assertEquals( false, longdouble.isFunction() );
+		assertEquals( false, doubledouble.isFunction() );
+		assertEquals( false, stringstring.isFunction() );
+		assertEquals( false, stringint.isFunction() );
+		assertEquals( false, stringlong.isFunction() );
+		assertEquals( false, stringdouble.isFunction() );
+		assertEquals( false, thread.isFunction() );
+		assertEquals( false, table.isFunction() );
+		assertEquals( false, userdataobj.isFunction() );
+		assertEquals( false, userdatacls.isFunction() );
+		assertEquals( true, somefunc.isFunction() );
+		assertEquals( true, someclosure.isFunction() );
 	}
 
 	
@@ -209,23 +209,23 @@ public class TypeTest extends TestCase {
 	}
 
 	public void testIsNumber() {
-		assertEquals( false, somenil.isnumber() );
-		assertEquals( false, sometrue.isnumber() );
-		assertEquals( false, somefalse.isnumber() );
-		assertEquals( true, zero.isnumber() );
-		assertEquals( true, intint.isnumber() );
-		assertEquals( true, longdouble.isnumber() );
-		assertEquals( true, doubledouble.isnumber() );
-		assertEquals( false, stringstring.isnumber() );
-		assertEquals( true, stringint.isnumber() );
-		assertEquals( true, stringlong.isnumber() );
-		assertEquals( true, stringdouble.isnumber() );
-		assertEquals( false, thread.isnumber() );
-		assertEquals( false, table.isnumber() );
-		assertEquals( false, userdataobj.isnumber() );
-		assertEquals( false, userdatacls.isnumber() );
-		assertEquals( false, somefunc.isnumber() );
-		assertEquals( false, someclosure.isnumber() );
+		assertEquals( false, somenil.isNumber() );
+		assertEquals( false, sometrue.isNumber() );
+		assertEquals( false, somefalse.isNumber() );
+		assertEquals( true, zero.isNumber() );
+		assertEquals( true, intint.isNumber() );
+		assertEquals( true, longdouble.isNumber() );
+		assertEquals( true, doubledouble.isNumber() );
+		assertEquals( false, stringstring.isNumber() );
+		assertEquals( true, stringint.isNumber() );
+		assertEquals( true, stringlong.isNumber() );
+		assertEquals( true, stringdouble.isNumber() );
+		assertEquals( false, thread.isNumber() );
+		assertEquals( false, table.isNumber() );
+		assertEquals( false, userdataobj.isNumber() );
+		assertEquals( false, userdatacls.isNumber() );
+		assertEquals( false, somefunc.isNumber() );
+		assertEquals( false, someclosure.isNumber() );
 	}
 
 	public void testIsString() {
@@ -976,25 +976,25 @@ public class TypeTest extends TestCase {
 	}
 
 	public void testCheckFunction() {
-		throwsErrorReq( somenil, "checkfunction" );
-		throwsErrorReq( sometrue, "checkfunction" );
-		throwsErrorReq( somefalse, "checkfunction" );
-		throwsErrorReq( zero, "checkfunction" );
-		throwsErrorReq( intint, "checkfunction" );
-		throwsErrorReq( longdouble, "checkfunction" );
-		throwsErrorReq( doubledouble, "checkfunction" );
-		assertEquals( somefunc, somefunc.checkfunction() );
-		assertEquals( someclosure, someclosure.checkfunction() );
-		assertEquals( somefunc, somefunc.checkfunction() );
-		assertEquals( someclosure, someclosure.checkfunction() );
-		throwsErrorReq( stringstring, "checkfunction" );
-		throwsErrorReq( stringint, "checkfunction" );
-		throwsErrorReq( stringlong, "checkfunction" );
-		throwsErrorReq( stringdouble, "checkfunction" );
-		throwsErrorReq( thread, "checkfunction" );
-		throwsErrorReq( table, "checkfunction" );
-		throwsErrorReq( userdataobj, "checkfunction" );
-		throwsErrorReq( userdatacls, "checkfunction" );
+		throwsErrorReq( somenil, "checkFunction" );
+		throwsErrorReq( sometrue, "checkFunction" );
+		throwsErrorReq( somefalse, "checkFunction" );
+		throwsErrorReq( zero, "checkFunction" );
+		throwsErrorReq( intint, "checkFunction" );
+		throwsErrorReq( longdouble, "checkFunction" );
+		throwsErrorReq( doubledouble, "checkFunction" );
+		assertEquals( somefunc, somefunc.checkFunction() );
+		assertEquals( someclosure, someclosure.checkFunction() );
+		assertEquals( somefunc, somefunc.checkFunction() );
+		assertEquals( someclosure, someclosure.checkFunction() );
+		throwsErrorReq( stringstring, "checkFunction" );
+		throwsErrorReq( stringint, "checkFunction" );
+		throwsErrorReq( stringlong, "checkFunction" );
+		throwsErrorReq( stringdouble, "checkFunction" );
+		throwsErrorReq( thread, "checkFunction" );
+		throwsErrorReq( table, "checkFunction" );
+		throwsErrorReq( userdataobj, "checkFunction" );
+		throwsErrorReq( userdatacls, "checkFunction" );
 	}
 
 	public void testCheckInt() {

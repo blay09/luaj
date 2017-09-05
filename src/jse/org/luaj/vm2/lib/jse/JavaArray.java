@@ -43,7 +43,7 @@ class JavaArray extends LuaUserdata {
 
 	private static final class LenFunction extends OneArgFunction {
 		public LuaValue call(LuaValue u) {
-			return LuaValue.valueOf(Array.getLength(((LuaUserdata)u).m_instance));
+			return LuaValue.valueOf(Array.getLength(((LuaUserdata)u).instance));
 		}
 	}
 
@@ -62,11 +62,11 @@ class JavaArray extends LuaUserdata {
 	
 	public LuaValue get(LuaValue key) {
 		if ( key.equals(LENGTH) )
-			return valueOf(Array.getLength(m_instance));
+			return valueOf(Array.getLength(instance));
 		if ( key.isint() ) {
 			int i = key.toint() - 1;
-			return i>=0 && i<Array.getLength(m_instance)?
-				CoerceJavaToLua.coerce(Array.get(m_instance,key.toint()-1)):
+			return i>=0 && i<Array.getLength(instance)?
+				CoerceJavaToLua.coerce(Array.get(instance,key.toint()-1)):
 				NIL;
 		}
 		return super.get(key);
@@ -75,8 +75,8 @@ class JavaArray extends LuaUserdata {
 	public void set(LuaValue key, LuaValue value) {
 		if ( key.isint() ) {
 			int i = key.toint() - 1;
-			if ( i>=0 && i<Array.getLength(m_instance) )
-				Array.set(m_instance,i,CoerceLuaToJava.coerce(value, m_instance.getClass().getComponentType()));
+			if ( i>=0 && i<Array.getLength(instance) )
+				Array.set(instance,i,CoerceLuaToJava.coerce(value, instance.getClass().getComponentType()));
 			else if ( m_metatable==null || ! settable(this,key,value) )
 					error("array index out of bounds");
 		}

@@ -75,7 +75,7 @@ class JavaClass extends JavaInstance implements CoerceJavaToLua.Coercion {
 	Field getField(LuaValue key) {
 		if ( fields == null ) {
 			Map m = new HashMap();
-			Field[] f = ((Class)m_instance).getFields();
+			Field[] f = ((Class) instance).getFields();
 			for ( int i=0; i<f.length; i++ ) {
 				Field fi = f[i];
 				if ( Modifier.isPublic(fi.getModifiers()) ) {
@@ -95,7 +95,7 @@ class JavaClass extends JavaInstance implements CoerceJavaToLua.Coercion {
 	LuaValue getMethod(LuaValue key) {
 		if ( methods == null ) {
 			Map namedlists = new HashMap();
-			Method[] m = ((Class)m_instance).getMethods();
+			Method[] m = ((Class) instance).getMethods();
 			for ( int i=0; i<m.length; i++ ) {
 				Method mi = m[i];
 				if ( Modifier.isPublic( mi.getModifiers()) ) {
@@ -107,7 +107,7 @@ class JavaClass extends JavaInstance implements CoerceJavaToLua.Coercion {
 				}
 			}
 			Map map = new HashMap();
-			Constructor[] c = ((Class)m_instance).getConstructors();
+			Constructor[] c = ((Class) instance).getConstructors();
 			List list = new ArrayList();
 			for ( int i=0; i<c.length; i++ ) 
 				if ( Modifier.isPublic(c[i].getModifiers()) )
@@ -135,7 +135,7 @@ class JavaClass extends JavaInstance implements CoerceJavaToLua.Coercion {
 	Class getInnerClass(LuaValue key) {
 		if ( innerclasses == null ) {
 			Map m = new HashMap();
-			Class[] c = ((Class)m_instance).getClasses();
+			Class[] c = ((Class) instance).getClasses();
 			for ( int i=0; i<c.length; i++ ) {
 				Class ci = c[i];
 				String name = ci.getName();

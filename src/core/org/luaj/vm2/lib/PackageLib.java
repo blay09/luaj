@@ -215,9 +215,9 @@ public class PackageLib extends TwoArgFunction {
 							
 			    /* call loader with module name as argument */
 				loader = searcher.invoke(name);
-				if ( loader.isfunction(1) )
+				if ( loader.isFunction(1) )
 					break;
-				if ( loader.isstring(1) )
+				if ( loader.isString(1) )
 					sb.append( loader.tojstring(1) );
 			}
 	
@@ -234,14 +234,14 @@ public class PackageLib extends TwoArgFunction {
 
 	public static class loadlib extends VarArgFunction {
 		public Varargs loadlib( Varargs args ) {
-			args.checkstring(1);
+			args.checkLuaString(1);
 			return varargsOf(NIL, valueOf("dynamic libraries not enabled"), valueOf("absent"));
 		}
 	}
 
 	public class preload_searcher extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			LuaString name = args.checkstring(1);
+			LuaString name = args.checkLuaString(1);
 			LuaValue val = package_.get(_PRELOAD).get(name);
 			return val.isnil()? 
 				valueOf("\n\tno field package.preload['"+name+"']"):
@@ -251,7 +251,7 @@ public class PackageLib extends TwoArgFunction {
 
 	public class lua_searcher extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			LuaString name = args.checkstring(1);
+			LuaString name = args.checkLuaString(1);
 			InputStream is = null;
 					
 			// get package path
@@ -263,13 +263,13 @@ public class PackageLib extends TwoArgFunction {
 			Varargs v = package_.get(_SEARCHPATH).invoke(varargsOf(name, path));
 			
 			// Did we get a result?
-			if (!v.isstring(1))
+			if (!v.isString(1))
 				return v.arg(2).tostring();
 			LuaString filename = v.arg1().strvalue();
 		
 			// Try to load the file.
 			v = globals.loadfile(filename.tojstring()); 
-			if ( v.arg1().isfunction() )
+			if ( v.arg1().isFunction() )
 				return LuaValue.varargsOf(v.arg1(), filename);
 			
 			// report error
@@ -279,8 +279,8 @@ public class PackageLib extends TwoArgFunction {
 
 	public class searchpath extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			String name = args.checkjstring(1);
-			String path = args.checkjstring(2);
+			String name = args.checkString(1);
+			String path = args.checkString(2);
 			String sep = args.optjstring(3, ".");
 			String rep = args.optjstring(4, FILE_SEP);
 			
@@ -323,14 +323,14 @@ public class PackageLib extends TwoArgFunction {
 	
 	public class java_searcher extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			String name = args.checkjstring(1);
+			String name = args.checkString(1);
 			String classname = toClassname( name );
 			Class c = null;
 			LuaValue v = null;
 			try {
 				c = Class.forName(classname);
 				v = (LuaValue) c.newInstance();
-				if (v.isfunction())
+				if (v.isFunction())
 					((LuaFunction)v).initupvalue1(globals);
 				return varargsOf(v, globals);
 			} catch ( ClassNotFoundException  cnfe ) {

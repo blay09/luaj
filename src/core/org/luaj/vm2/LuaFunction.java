@@ -48,11 +48,11 @@ public class LuaFunction extends LuaValue {
 		return "function";
 	}
 	
-	public boolean isfunction() {
+	public boolean isFunction() {
 		return true;
 	}
 
-	public LuaFunction checkfunction()  {
+	public LuaFunction checkFunction()  {
 		return this;
 	}
 	

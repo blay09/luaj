@@ -114,7 +114,7 @@ public abstract class Varargs {
 	 * @return true if the argument exists and is a function or closure, false otherwise
 	 * @see LuaValue#TFUNCTION
 	 * */
-	public boolean isfunction(int i)   { return arg(i).isfunction(); }
+	public boolean isFunction(int i)   { return arg(i).isFunction(); }
 
 	/** Tests if argument i is a number.
 	 * Since anywhere a number is required, a string can be used that 
@@ -126,7 +126,7 @@ public abstract class Varargs {
 	 * @see LuaValue#TNUMBER
 	 * @see LuaValue#TSTRING
 	 * */
-	public boolean isnumber(int i)     { return arg(i).isnumber(); }
+	public boolean isNumber(int i)     { return arg(i).isNumber(); }
 
 	/** Tests if argument i is a string.  
 	 * Since all lua numbers can be used where strings are used, 
@@ -136,7 +136,7 @@ public abstract class Varargs {
 	 * @see LuaValue#TNUMBER
 	 * @see LuaValue#TSTRING
 	 * */
-	public boolean isstring(int i)     { return arg(i).isstring(); }
+	public boolean isString(int i)     { return arg(i).isstring(); }
 
 	/** Tests if argument i is a table.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -170,7 +170,7 @@ public abstract class Varargs {
 	 * @return true if argument i is boolean true, false if it is false, or defval if not supplied or nil 
 	 * @exception LuaError if the argument is not a lua boolean
 	 * */
-	public boolean      optboolean(int i, boolean defval)          { return arg(i).booleanOrElse(defval); }
+	public boolean booleanOrElse(int i, boolean defval)          { return arg(i).booleanOrElse(defval); }
 
 	/** Return argument i as a closure, {@code defval} if nil, or throw a LuaError if any other type.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -298,14 +298,14 @@ public abstract class Varargs {
 	 * @return LuaValue that can be called if argument i is lua function or closure
 	 * @exception LuaError if the argument is not a lua function or closure
 	 * */
-	public LuaFunction    checkfunction(int i)         { return arg(i).checkfunction(); }
+	public LuaFunction checkFunction(int i)         { return arg(i).checkFunction(); }
 
 	/** Return argument i as a java int value, discarding any fractional part, or throw an error if not a number.
 	 * @param i the index of the argument to test, 1 is the first argument
 	 * @return int value with fraction discarded and truncated if necessary if argument i is number
 	 * @exception LuaError if the argument is not a number
 	 * */
-	public int          checkint(int i)              { return arg(i).checknumber().toint(); }
+	public int checkInt(int i)              { return arg(i).checknumber().toint(); }
 
 	/** Return argument i as a java int value, or throw an error if not a number or is not representable by a java int.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -333,14 +333,14 @@ public abstract class Varargs {
 	 * @return String value if argument i is a string or number
 	 * @exception LuaError if the argument is not a string or number
 	 * */
-	public String       checkjstring(int i)          { return arg(i).checkString(); }
+	public String checkString(int i)          { return arg(i).checkString(); }
 
 	/** Return argument i as a LuaString if a string or number, or throw an error if any other type
 	 * @param i the index of the argument to test, 1 is the first argument
 	 * @return LuaString value if argument i is a string or number
 	 * @exception LuaError if the argument is not a string or number
 	 * */
-	public LuaString    checkstring(int i)           { return arg(i).checkLuaString(); }
+	public LuaString checkLuaString(int i)           { return arg(i).checkLuaString(); }
 
 	/** Return argument i as a LuaTable if a lua table, or throw an error if any other type.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -361,7 +361,7 @@ public abstract class Varargs {
 	 * @return java Object value if argument i is a userdata
 	 * @exception LuaError if the argument is not a userdata
 	 * */
-	public Object       checkuserdata(int i)         { return arg(i).checkUserdata(); }
+	public Object checkUserdata(int i)         { return arg(i).checkUserdata(); }
 
 	/** Return argument i as a java Object if it is a userdata whose instance Class c or a subclass, 
 	 * or throw an error if any other type.
@@ -370,7 +370,7 @@ public abstract class Varargs {
 	 * @return java Object value if argument i is a userdata whose instance Class c or a subclass
 	 * @exception LuaError if the argument is not a userdata or from whose instance c is not assignable
 	 * */
-	public Object       checkuserdata(int i,Class c) { return arg(i).checkUserdata(c); }
+	public <T> T checkUserdata(int i, Class<T> c) { return arg(i).checkUserdata(c); }
 
 	/** Return argument i as a LuaValue if it exists, or throw an error.
 	 * @param i the index of the argument to test, 1 is the first argument

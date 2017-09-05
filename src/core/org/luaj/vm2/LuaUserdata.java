@@ -24,20 +24,20 @@ package org.luaj.vm2;
 
 public class LuaUserdata<T> extends LuaValue {
 	
-	public T m_instance;
+	public T instance;
 	public LuaValue m_metatable;
 	
 	public LuaUserdata(T obj) {
-		m_instance = obj;
+		instance = obj;
 	}
 	
 	public LuaUserdata(T obj, LuaValue metatable) {
-		m_instance = obj;
+		instance = obj;
 		m_metatable = metatable;
 	}
 	
 	public String tojstring() {
-		return String.valueOf(m_instance);
+		return String.valueOf(instance);
 	}
 	
 	public int type() {
@@ -49,22 +49,22 @@ public class LuaUserdata<T> extends LuaValue {
 	}
 
 	public int hashCode() {
-		return m_instance.hashCode();
+		return instance.hashCode();
 	}
 	
 	public Object userdata() {
-		return m_instance;
+		return instance;
 	}
 	
 	public boolean isuserdata()                        { return true; }
-	public boolean isuserdata(Class c)                 { return c.isAssignableFrom(m_instance.getClass()); }
-	public Object  touserdata()                        { return m_instance; }
-	public Object  touserdata(Class c)                 { return c.isAssignableFrom(m_instance.getClass())? m_instance: null; }
-	public Object  optuserdata(Object defval)          { return m_instance; }
+	public boolean isuserdata(Class c)                 { return c.isAssignableFrom(instance.getClass()); }
+	public Object  touserdata()                        { return instance; }
+	public Object  touserdata(Class c)                 { return c.isAssignableFrom(instance.getClass())? instance : null; }
+	public Object  optuserdata(Object defval)          { return instance; }
 	public Object optuserdata(Class c, Object defval) {
-		if (!c.isAssignableFrom(m_instance.getClass()))
+		if (!c.isAssignableFrom(instance.getClass()))
 			typerror(c.getName());
-		return m_instance;
+		return instance;
 	}
 	
 	public LuaValue getmetatable() {
@@ -77,12 +77,12 @@ public class LuaUserdata<T> extends LuaValue {
 	}
 
 	public Object checkUserdata() {
-		return m_instance;
+		return instance;
 	}
 	
 	public Object checkUserdata(Class c) {
-		if ( c.isAssignableFrom(m_instance.getClass()) )
-			return m_instance;		
+		if ( c.isAssignableFrom(instance.getClass()) )
+			return instance;
 		return typerror(c.getName());
 	}
 	
@@ -101,7 +101,7 @@ public class LuaUserdata<T> extends LuaValue {
 		if ( ! (val instanceof LuaUserdata) )
 			return false;
 		LuaUserdata u = (LuaUserdata) val;
-		return m_instance.equals(u.m_instance);
+		return instance.equals(u.instance);
 	}
 
 	// equality w/ metatable processing
@@ -116,7 +116,7 @@ public class LuaUserdata<T> extends LuaValue {
 	// equality w/o metatable processing
 	public boolean raweq( LuaValue val )      { return val.raweq(this); }
 	public boolean raweq( LuaUserdata val )   {
-		return this == val || (m_metatable == val.m_metatable && m_instance.equals(val.m_instance)); 
+		return this == val || (m_metatable == val.m_metatable && instance.equals(val.instance));
 	}
 	
 	// __eq metatag processing

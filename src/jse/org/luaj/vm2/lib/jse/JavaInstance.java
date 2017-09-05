@@ -48,11 +48,11 @@ class JavaInstance extends LuaUserdata {
 
 	public LuaValue get(LuaValue key) {
 		if ( jclass == null )
-			jclass = JavaClass.forClass(m_instance.getClass());
+			jclass = JavaClass.forClass(instance.getClass());
 		Field f = jclass.getField(key);
 		if ( f != null )
 			try {
-				return CoerceJavaToLua.coerce(f.get(m_instance));
+				return CoerceJavaToLua.coerce(f.get(instance));
 			} catch (Exception e) {
 				throw new LuaError(e);
 			}
@@ -67,11 +67,11 @@ class JavaInstance extends LuaUserdata {
 
 	public void set(LuaValue key, LuaValue value) {
 		if ( jclass == null )
-			jclass = JavaClass.forClass(m_instance.getClass());
+			jclass = JavaClass.forClass(instance.getClass());
 		Field f = jclass.getField(key);
 		if ( f != null )
 			try {
-				f.set(m_instance, CoerceLuaToJava.coerce(value, f.getType()));
+				f.set(instance, CoerceLuaToJava.coerce(value, f.getType()));
 				return;
 			} catch (Exception e) {
 				throw new LuaError(e);

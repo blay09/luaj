@@ -88,7 +88,7 @@ public class CoroutineLib extends TwoArgFunction {
 
 	final class create extends LibFunction {
 		public LuaValue call(LuaValue f) {
-			return new LuaThread(globals, f.checkfunction());
+			return new LuaThread(globals, f.checkFunction());
 		}
 	}
 
@@ -121,7 +121,7 @@ public class CoroutineLib extends TwoArgFunction {
 
 	final class wrap extends LibFunction {
 		public LuaValue call(LuaValue f) {
-			final LuaValue func = f.checkfunction();
+			final LuaValue func = f.checkFunction();
 			final LuaThread thread = new LuaThread(globals, func);
 			return new wrapper(thread);
 		}

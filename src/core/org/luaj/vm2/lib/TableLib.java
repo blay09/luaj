@@ -109,7 +109,7 @@ public class TableLib extends TwoArgFunction {
 				return NONE;
 			}
 			default: {
-				args.arg1().checktable().insert(args.checkint(2),args.arg(3));
+				args.arg1().checktable().insert(args.checkInt(2),args.arg(3));
 				return NONE;
 			}
 			}
@@ -136,7 +136,7 @@ public class TableLib extends TwoArgFunction {
 	static class sort extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
 			args.arg1().checktable().sort(
-					args.arg(2).isnil()? NIL: args.arg(2).checkfunction());
+					args.arg(2).isnil()? NIL: args.arg(2).checkFunction());
 			return NONE;
 		}
 	}
@@ -148,8 +148,8 @@ public class TableLib extends TwoArgFunction {
 			LuaTable t = args.checktable(1);
 			switch (args.narg()) {
 			case 1: return t.unpack();
-			case 2: return t.unpack(args.checkint(2));
-			default: return t.unpack(args.checkint(2), args.checkint(3));
+			case 2: return t.unpack(args.checkInt(2));
+			default: return t.unpack(args.checkInt(2), args.checkInt(3));
 			}
 		}
 	}

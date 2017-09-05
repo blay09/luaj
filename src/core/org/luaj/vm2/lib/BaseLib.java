@@ -161,11 +161,11 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 	// "dofile", // ( filename ) -> result1, ...
 	final class dofile extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			args.argcheck(args.isstring(1) || args.isnil(1), 1, "filename must be string or nil");
-			String filename = args.isstring(1)? args.tojstring(1): null;
+			args.argcheck(args.isString(1) || args.isnil(1), 1, "filename must be string or nil");
+			String filename = args.isString(1)? args.tojstring(1): null;
 			Varargs v = filename == null? 
 					loadStream( globals.STDIN, "=stdin", "bt", globals ):
-					loadFile( args.checkjstring(1), "bt", globals );
+					loadFile( args.checkString(1), "bt", globals );
 			return v.isnil(1)? error(v.tojstring(2)): v.arg1().invoke();			
 		}
 	}
@@ -193,20 +193,20 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 	final class load extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
 			LuaValue ld = args.arg1();
-			args.argcheck(ld.isstring() || ld.isfunction(), 1, "ld must be string or function");
+			args.argcheck(ld.isstring() || ld.isFunction(), 1, "ld must be string or function");
 			String source = args.optjstring(2, ld.isstring()? ld.tojstring(): "=(load)");
 			String mode = args.optjstring(3, "bt");
 			LuaValue env = args.optvalue(4, globals);
 			return loadStream(ld.isstring()? ld.strvalue().toInputStream(): 
-				new StringInputStream(ld.checkfunction()), source, mode, env);
+				new StringInputStream(ld.checkFunction()), source, mode, env);
 		}
 	}
 
 	// "loadfile", // ( [filename [, mode [, env]]] ) -> chunk | nil, msg
 	final class loadfile extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			args.argcheck(args.isstring(1) || args.isnil(1), 1, "filename must be string or nil");
-			String filename = args.isstring(1)? args.tojstring(1): null;
+			args.argcheck(args.isString(1) || args.isnil(1), 1, "filename must be string or nil");
+			String filename = args.isString(1)? args.tojstring(1): null;
 			String mode = args.optjstring(2, "bt");
 			LuaValue env = args.optvalue(3, globals);
 			return filename == null? 
@@ -310,7 +310,7 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 			int n = args.narg()-1; 				
 			if ( args.arg1().equals(valueOf("#")) )
 				return valueOf(n);
-			int i = args.checkint(1);
+			int i = args.checkInt(1);
 			if ( i == 0 || i < -n )
 				argerror(1,"index out of range");
 			return args.subargs(i<0? n+i+2: i+1);

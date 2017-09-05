@@ -148,7 +148,7 @@ public class OsLib extends TwoArgFunction {
 					return valueOf(clock());
 				case DATE: {
 					String s = args.optjstring(1, "%c");
-					double t = args.isnumber(2)? args.todouble(2): time(null);
+					double t = args.isNumber(2)? args.todouble(2): time(null);
 					if (s.equals("*t")) {
 						Calendar d = Calendar.getInstance();
 						d.setTime(new Date((long)(t*1000)));
@@ -174,14 +174,14 @@ public class OsLib extends TwoArgFunction {
 					exit(args.optint(1, 0));
 					return NONE;
 				case GETENV: {
-					final String val = getenv(args.checkjstring(1));
+					final String val = getenv(args.checkString(1));
 					return val!=null? valueOf(val): NIL;
 				}
 				case REMOVE:
-					remove(args.checkjstring(1));
+					remove(args.checkString(1));
 					return LuaValue.TRUE;
 				case RENAME:
-					rename(args.checkjstring(1), args.checkjstring(2));
+					rename(args.checkString(1), args.checkString(2));
 					return LuaValue.TRUE;
 				case SETLOCALE: {
 					String s = setlocale(args.optjstring(1,null), args.optjstring(2, "all"));

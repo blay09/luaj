@@ -106,7 +106,7 @@ public class SampleApplet extends Applet implements ResourceFinder {
 
 	public void update(Graphics g) {
 		LuaValue u = globals.get("update");
-		if (!u.isfunction())
+		if (!u.isFunction())
 			super.update(g);
 		else
 			pcall.call(
@@ -117,7 +117,7 @@ public class SampleApplet extends Applet implements ResourceFinder {
 
 	public void paint(Graphics g) {
 		LuaValue p = globals.get("paint");
-		if (!p.isfunction())
+		if (!p.isFunction())
 			super.paint(g);
 		else
 			pcall.call(

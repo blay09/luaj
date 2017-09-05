@@ -109,7 +109,7 @@ public class DumpLoadEndianIntTest extends TestCase {
             
             // load again using compiler
             InputStream is = new ByteArrayInputStream(dumped);
-            f = globals.load(is, "dumped", "b", globals).checkfunction();
+            f = globals.load(is, "dumped", "b", globals).checkFunction();
             r = f.call();
             actual = r.tojstring();
             assertEquals( expectedPostDump, actual );

@@ -61,7 +61,7 @@ public class LuaNumber extends LuaValue {
 		return this;
 	}
 	
-	public boolean isnumber() {
+	public boolean isNumber() {
 		return true;
 	}
 	

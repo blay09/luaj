@@ -83,7 +83,7 @@ public class LuaScriptEngine extends AbstractScriptEngine implements ScriptEngin
 	    	InputStream is = new Utf8Encoder(script);
 	    	try {
 	    		final LuaState g = context.globals;
-	    		final LuaFunction f = g.load(script, "script").checkfunction();
+	    		final LuaFunction f = g.load(script, "script").checkFunction();
 	    		return new LuajCompiledScript(f, g);
 			} catch ( LuaError lee ) {
 				throw new ScriptException(lee.getMessage() );

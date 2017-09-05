@@ -84,14 +84,14 @@ public class WeakTable implements Metatable {
 		value = value.strongvalue();
 		if ( value == null )
 			return null;
-		if ( weakkeys && !( key.isnumber() || key.isstring() || key.isboolean() )) {
-			if ( weakvalues && !( value.isnumber() || value.isstring() || value.isboolean() )) {
+		if ( weakkeys && !( key.isNumber() || key.isstring() || key.isboolean() )) {
+			if ( weakvalues && !( value.isNumber() || value.isstring() || value.isboolean() )) {
 				return new WeakKeyAndValueSlot( key, value, null );
 			} else {
 				return new WeakKeySlot( key, value, null );
 			}
 		}
-		if ( weakvalues && ! (value.isnumber() || value.isstring() || value.isboolean() )) {
+		if ( weakvalues && ! (value.isNumber() || value.isstring() || value.isboolean() )) {
 			return new WeakValueSlot( key, value, null );
 		}
 		return LuaTable.defaultEntry( key, value );

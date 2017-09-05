@@ -297,7 +297,7 @@ public class LuaValue extends Varargs {
 	/** Check if {@code this} is a {@code function} that is a closure, 
 	 * meaning interprets lua bytecode for its execution
 	 * @return true if this is a {@code closure}, otherwise false
-	 * @see #isfunction()
+	 * @see #isFunction()
 	 * @see #checkclosure()
 	 * @see #optclosure(LuaClosure)
 	 * @see #TFUNCTION
@@ -307,11 +307,11 @@ public class LuaValue extends Varargs {
 	/** Check if {@code this} is a {@code function}
 	 * @return true if this is a {@code function}, otherwise false
 	 * @see #isclosure()
-	 * @see #checkfunction()
+	 * @see #checkFunction()
 	 * @see #functionOrElse(LuaFunction)
 	 * @see #TFUNCTION
 	 */
-	public boolean isfunction()          { return false; }
+	public boolean isFunction()          { return false; }
 	
 	/** Check if {@code this} is a {@code number} and is representable by java int 
 	 * without rounding or truncation
@@ -335,7 +335,7 @@ public class LuaValue extends Varargs {
 	 * @return true if this is a {@code LuaInteger}, 
 	 * otherwise false
 	 * @see #isint()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #tonumber()
 	 * @see #TNUMBER
 	 */
@@ -377,7 +377,7 @@ public class LuaValue extends Varargs {
 	 * @see #optnumber(LuaNumber)
 	 * @see #TNUMBER
 	 */
-	public boolean isnumber()            { return false; } // may convert from string
+	public boolean isNumber()            { return false; } // may convert from string
 	
 	/** Check if {@code this} is a {@code string}
 	 * @return true if this is a {@code string}, 
@@ -443,7 +443,7 @@ public class LuaValue extends Varargs {
 	 * @see #toint()
 	 * @see #todouble()
 	 * @see #checknumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public byte    tobyte()              { return 0; }
@@ -453,7 +453,7 @@ public class LuaValue extends Varargs {
 	 * @see #toint()
 	 * @see #todouble()
 	 * @see #checknumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public char    tochar()              { return 0; }
@@ -468,7 +468,7 @@ public class LuaValue extends Varargs {
 	 * @see #tofloat()
 	 * @see #optdouble(double)
 	 * @see #checknumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public double  todouble()            { return 0; }
@@ -478,7 +478,7 @@ public class LuaValue extends Varargs {
 	 * @see #toint()
 	 * @see #todouble()
 	 * @see #checknumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public float   tofloat()             { return 0; }
@@ -493,7 +493,7 @@ public class LuaValue extends Varargs {
 	 * @see #todouble()
 	 * @see #optint(int)
 	 * @see #checknumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public int     toint()               { return 0; }
@@ -506,7 +506,7 @@ public class LuaValue extends Varargs {
 	 * @see #todouble()
 	 * @see #optlong(long)
 	 * @see #checknumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public long    tolong()              { return 0; }
@@ -516,7 +516,7 @@ public class LuaValue extends Varargs {
 	 * @see #toint()
 	 * @see #todouble()
 	 * @see #checknumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public short   toshort()             { return 0; }
@@ -638,7 +638,7 @@ public class LuaValue extends Varargs {
 	 * @see #checkdouble()
 	 * @see #todouble()
 	 * @see #tonumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public double      optdouble(double defval)            { argerror("double");    return 0;     }
@@ -653,8 +653,8 @@ public class LuaValue extends Varargs {
 	 * {@code defval} if nil or none, 
 	 * throws {@link LuaError} otherwise
 	 * @throws LuaError if was not a function or nil or none.
-	 * @see #checkfunction()
-	 * @see #isfunction()
+	 * @see #checkFunction()
+	 * @see #isFunction()
 	 * @see #TFUNCTION
 	 */
 	public LuaFunction functionOrElse(LuaFunction defval)     { argerror("function");  return null;  }
@@ -671,7 +671,7 @@ public class LuaValue extends Varargs {
 	 * @see #checkInt()
 	 * @see #toint()
 	 * @see #tonumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public int         optint(int defval)                  { argerror("int");       return 0;     }
@@ -687,7 +687,7 @@ public class LuaValue extends Varargs {
 	 * @see #checkInt()
 	 * @see #toint()
 	 * @see #tonumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public LuaInteger  optinteger(LuaInteger defval)       { argerror("integer");   return null;  }
@@ -703,7 +703,7 @@ public class LuaValue extends Varargs {
 	 * @see #checkInt()
 	 * @see #toint()
 	 * @see #tonumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public long        optlong(long defval)                { argerror("long");      return 0;     }
@@ -720,7 +720,7 @@ public class LuaValue extends Varargs {
 	 * @see #checkInt()
 	 * @see #toint()
 	 * @see #tonumber()
-	 * @see #isnumber()
+	 * @see #isNumber()
 	 * @see #TNUMBER
 	 */
 	public LuaNumber   optnumber(LuaNumber defval)         { argerror("number");    return null;  }
@@ -833,7 +833,7 @@ public class LuaValue extends Varargs {
 	 * {@link LuaClosure} is a subclass of {@link LuaFunction} that interprets lua bytecode. 
 	 * @return {@code this} cast as {@link LuaClosure} 
 	 * @throws LuaError if not a {@link LuaClosure}
-	 * @see #checkfunction()
+	 * @see #checkFunction()
 	 * @see #optclosure(LuaClosure)
 	 * @see #isclosure()
 	 * @see #TFUNCTION
@@ -864,7 +864,7 @@ public class LuaValue extends Varargs {
 	 * @throws LuaError if not a function 
 	 * @see #checkclosure()
 	 */
-	public LuaFunction    checkfunction()         { argerror("function");  return null; }	
+	public LuaFunction checkFunction()         { argerror("function");  return null; }
 
 
 	/** Check that the value is a Globals instance, or throw {@link LuaError} if not 
@@ -3297,7 +3297,7 @@ public class LuaValue extends Varargs {
 					return res;
 			} else if ((tm = t.metatag(INDEX)).isnil())
 				t.indexerror();
-			if (tm.isfunction())
+			if (tm.isFunction())
 				return tm.call(t, key);
 			t = tm;
 		}
@@ -3325,7 +3325,7 @@ public class LuaValue extends Varargs {
 				}
 			} else if ((tm = t.metatag(NEWINDEX)).isnil())
 				t.typerror("index");
-			if (tm.isfunction()) {
+			if (tm.isFunction()) {
 				tm.call(t, key, value);
 				return true;
 			}
