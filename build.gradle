@@ -1,5 +1,7 @@
 apply plugin: 'java'
 
+archivesBaseName = "luaj"
+
 repositories {
     mavenLocal()
     mavenCentral()
