@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
 archivesBaseName = "luaj"
+version = "3.0.1"
 
 repositories {
     mavenLocal()
