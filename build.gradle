@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+}
+
+dependencies {
+    compile "org.apache.bcel:bcel:6.0"
+}
+
+sourceSets.main.java.srcDirs = ["src/core", "src/jse"]

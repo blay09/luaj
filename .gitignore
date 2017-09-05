@@ -15,3 +15,4 @@ docs
 *.0
 *.iml
 .idea/**
+.gradle
