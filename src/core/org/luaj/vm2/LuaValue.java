@@ -288,7 +288,7 @@ public class LuaValue extends Varargs {
 	 * @return true if this is a {@code boolean}, otherwise false
 	 * @see #isboolean()
 	 * @see #toboolean()
-	 * @see #checkboolean()
+	 * @see #checkBoolean()
 	 * @see #booleanOrElse(boolean)
 	 * @see #TBOOLEAN
 	 */
@@ -365,7 +365,7 @@ public class LuaValue extends Varargs {
 	 * @see #TNIL
 	 * @see #TNONE
 	 */
-	public boolean isnil()               { return false; }
+	public boolean isNil()               { return false; }
 	
 	/** Check if {@code this} is a {@code number}
 	 * @return true if this is a {@code number}, 
@@ -432,7 +432,7 @@ public class LuaValue extends Varargs {
 	/** Convert to boolean false if {@link #NIL} or {@link #FALSE}, true if anything else
 	 * @return Value cast to byte if number or string convertible to number, otherwise 0
 	 * @see #booleanOrElse(boolean)
-	 * @see #checkboolean() 
+	 * @see #checkBoolean()
 	 * @see #isboolean()
 	 * @see #TBOOLEAN
 	 */
@@ -607,7 +607,7 @@ public class LuaValue extends Varargs {
 	 * {@code defval} if nil or none, 
 	 * throws {@link LuaError} otherwise
 	 * @throws LuaError if was not a boolean or nil or none.
-	 * @see #checkboolean()
+	 * @see #checkBoolean()
 	 * @see #isboolean()
 	 * @see #TBOOLEAN
 	 */
@@ -810,7 +810,7 @@ public class LuaValue extends Varargs {
 	 * @return {@code this} if not nil or none, else {@code defval}
 	 * @see #NIL
 	 * @see #NONE
-	 * @see #isnil()
+	 * @see #isNil()
 	 * @see Varargs#isnoneornil(int)
 	 * @see #TNIL
 	 * @see #TNONE
@@ -825,7 +825,7 @@ public class LuaValue extends Varargs {
 	 * @see #booleanOrElse(boolean)
 	 * @see #TBOOLEAN
 	 */
-	public boolean     checkboolean()          { argerror("boolean");   return false; }
+	public boolean checkBoolean()          { argerror("boolean");   return false; }
 	
 	/** Check that the value is a {@link LuaClosure} , 
 	 * or throw {@link LuaError} if not
@@ -1026,7 +1026,7 @@ public class LuaValue extends Varargs {
 	
 	/** Return true if this is a valid key in a table index operation.
 	 * @return true if valid as a table key, otherwise false
-	 * @see #isnil()
+	 * @see #isNil()
 	 * @see #isinttype()
 	 */
 	public boolean isvalidkey()         { return true; }
@@ -1305,7 +1305,7 @@ public class LuaValue extends Varargs {
 	 * LuaValue k = LuaValue.NIL;
 	 * while ( true ) {
 	 *    Varargs n = table.next(k);
-	 *    if ( (k = n.arg1()).isnil() )
+	 *    if ( (k = n.arg1()).isNil() )
 	 *       break;
 	 *    LuaValue v = n.arg(2)
 	 *    process( k, v )
@@ -1320,7 +1320,7 @@ public class LuaValue extends Varargs {
 	 * @see #valueOf(int)
 	 * @see Varargs#arg1()
 	 * @see Varargs#arg(int)
-	 * @see #isnil()
+	 * @see #isNil()
 	 */
 	public Varargs next(LuaValue index) { return typerror("table"); }
 	
@@ -1332,7 +1332,7 @@ public class LuaValue extends Varargs {
 	 *   LuaValue k = LuaValue.NIL;
 	 *   while ( true ) {
 	 *      Varargs n = table.inext(k);
-	 *      if ( (k = n.arg1()).isnil() )
+	 *      if ( (k = n.arg1()).isNil() )
 	 *         break;
 	 *      LuaValue v = n.arg(2)
 	 *      process( k, v )
@@ -1348,7 +1348,7 @@ public class LuaValue extends Varargs {
 	 * @see #valueOf(int)
 	 * @see Varargs#arg1()
 	 * @see Varargs#arg(int)
-	 * @see #isnil()
+	 * @see #isNil()
 	 */
 	public Varargs inext(LuaValue index) { return typerror("table"); }
 	
@@ -2152,7 +2152,7 @@ public class LuaValue extends Varargs {
 	 */
 	public static final boolean eqmtcall(LuaValue lhs, LuaValue lhsmt, LuaValue rhs, LuaValue rhsmt) {
 		LuaValue h = lhsmt.rawget(EQ);
-		return h.isnil() || h!=rhsmt.rawget(EQ)? false: h.call(lhs,rhs).toboolean();
+		return h.isNil() || h!=rhsmt.rawget(EQ)? false: h.call(lhs,rhs).toboolean();
 	}
 	
 	/** Add: Perform numeric add operation with another value 
@@ -2528,9 +2528,9 @@ public class LuaValue extends Varargs {
 	 */
 	protected LuaValue arithmt(LuaValue tag, LuaValue op2) {
 		LuaValue h = this.metatag(tag);
-		if ( h.isnil() ) {
+		if ( h.isNil() ) {
 			h = op2.metatag(tag);
-			if ( h.isnil() )
+			if ( h.isNil() )
 				error( "attempt to perform arithmetic "+tag+" on "+typename()+" and "+op2.typename() );
 		}
 		return h.call( this, op2 );
@@ -2559,7 +2559,7 @@ public class LuaValue extends Varargs {
 	 */
 	protected LuaValue arithmtwith(LuaValue tag, double op1) {
 		LuaValue h = metatag(tag);
-		if ( h.isnil() )
+		if ( h.isNil() )
 			error( "attempt to perform arithmetic "+tag+" on number and "+typename() );
 		return h.call( LuaValue.valueOf(op1), this );
 	}
@@ -2981,9 +2981,9 @@ public class LuaValue extends Varargs {
 	 */
 	public LuaValue comparemt( LuaValue tag, LuaValue op1 ) { 
 		LuaValue h;
-		if (!(h = metatag(tag)).isnil() || !(h = op1.metatag(tag)).isnil())
+		if (!(h = metatag(tag)).isNil() || !(h = op1.metatag(tag)).isNil())
 			return h.call(this, op1);
-		if (LuaValue.LE.raweq(tag) && (!(h = metatag(LT)).isnil() || !(h = op1.metatag(LT)).isnil()))
+		if (LuaValue.LE.raweq(tag) && (!(h = metatag(LT)).isNil() || !(h = op1.metatag(LT)).isNil()))
 			return h.call(op1, this).not();
 		return error("attempt to compare "+tag+" on "+typename()+" and "+op1.typename());
 	}
@@ -3104,7 +3104,7 @@ public class LuaValue extends Varargs {
 	 */
 	public LuaValue concatmt(LuaValue rhs) {
 		LuaValue h=metatag(CONCAT);
-		if ( h.isnil() && (h=rhs.metatag(CONCAT)).isnil())
+		if ( h.isNil() && (h=rhs.metatag(CONCAT)).isNil())
 			error("attempt to concatenate "+typename()+" and "+rhs.typename());
 		return h.call(this,rhs);
 	}
@@ -3293,9 +3293,9 @@ public class LuaValue extends Varargs {
 		do { 
 			if (t.istable()) {
 				LuaValue res = t.rawget(key);
-				if ((!res.isnil()) || (tm = t.metatag(INDEX)).isnil())
+				if ((!res.isNil()) || (tm = t.metatag(INDEX)).isNil())
 					return res;
-			} else if ((tm = t.metatag(INDEX)).isnil())
+			} else if ((tm = t.metatag(INDEX)).isNil())
 				t.indexerror();
 			if (tm.isFunction())
 				return tm.call(t, key);
@@ -3319,11 +3319,11 @@ public class LuaValue extends Varargs {
 		int loop = 0;
 		do { 
 			if (t.istable()) {
-				if ((!t.rawget(key).isnil()) || (tm = t.metatag(NEWINDEX)).isnil()) {
+				if ((!t.rawget(key).isNil()) || (tm = t.metatag(NEWINDEX)).isNil()) {
 					t.rawset(key, value);
 					return true;
 				}
-			} else if ((tm = t.metatag(NEWINDEX)).isnil())
+			} else if ((tm = t.metatag(NEWINDEX)).isNil())
 				t.typerror("index");
 			if (tm.isFunction()) {
 				tm.call(t, key, value);
@@ -3359,7 +3359,7 @@ public class LuaValue extends Varargs {
      */
 	protected LuaValue checkmetatag(LuaValue tag, String reason) {
 		LuaValue h = this.metatag(tag);
-		if ( h.isnil() )
+		if ( h.isNil() )
 			throw new LuaError(reason+typename());
 		return h;
 	}

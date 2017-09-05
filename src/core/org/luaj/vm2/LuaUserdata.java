@@ -24,7 +24,7 @@ package org.luaj.vm2;
 
 public class LuaUserdata<T> extends LuaValue {
 	
-	public T instance;
+	public final T instance;
 	public LuaValue m_metatable;
 	
 	public LuaUserdata(T obj) {

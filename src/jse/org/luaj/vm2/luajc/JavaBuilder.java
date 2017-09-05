@@ -564,7 +564,7 @@ public class JavaBuilder {
 	}
 
 	public void isNil() {
-        append(factory.createInvoke(STR_LUAVALUE, "isnil", Type.BOOLEAN, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
+        append(factory.createInvoke(STR_LUAVALUE, "isNil", Type.BOOLEAN, Type.NO_ARGS, Constants.INVOKEVIRTUAL));
 	}
 
 	public void testForLoop() {

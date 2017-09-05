@@ -1,7 +1,6 @@
 package org.luaj.vm2.lib.jse;
 
 import org.luaj.vm2.LuaValue;
-import org.luaj.vm2.lib.OsLib;
 import org.luaj.vm2.lib.jme.JmePlatform;
 
 import junit.framework.TestCase;
@@ -61,8 +60,8 @@ public class OsLibTest extends TestCase {
 		LuaValue USER = LuaValue.valueOf("USER");
 		LuaValue jse_user = jse_lib.get("getenv").call(USER);
 		LuaValue jme_user = jme_lib.get("getenv").call(USER);
-		assertFalse(jse_user.isnil());
-		assertTrue(jme_user.isnil());
+		assertFalse(jse_user.isNil());
+		assertTrue(jme_user.isNil());
 		System.out.println("User: " + jse_user);
 	}
 

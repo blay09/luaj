@@ -189,23 +189,23 @@ public class TypeTest extends TestCase {
 	}
 
 	public void testIsNil() {
-		assertEquals( true, somenil.isnil() );
-		assertEquals( false, sometrue.isnil() );
-		assertEquals( false, somefalse.isnil() );
-		assertEquals( false, zero.isnil() );
-		assertEquals( false, intint.isnil() );
-		assertEquals( false, longdouble.isnil() );
-		assertEquals( false, doubledouble.isnil() );
-		assertEquals( false, stringstring.isnil() );
-		assertEquals( false, stringint.isnil() );
-		assertEquals( false, stringlong.isnil() );
-		assertEquals( false, stringdouble.isnil() );
-		assertEquals( false, thread.isnil() );
-		assertEquals( false, table.isnil() );
-		assertEquals( false, userdataobj.isnil() );
-		assertEquals( false, userdatacls.isnil() );
-		assertEquals( false, somefunc.isnil() );
-		assertEquals( false, someclosure.isnil() );
+		assertEquals( true, somenil.isNil() );
+		assertEquals( false, sometrue.isNil() );
+		assertEquals( false, somefalse.isNil() );
+		assertEquals( false, zero.isNil() );
+		assertEquals( false, intint.isNil() );
+		assertEquals( false, longdouble.isNil() );
+		assertEquals( false, doubledouble.isNil() );
+		assertEquals( false, stringstring.isNil() );
+		assertEquals( false, stringint.isNil() );
+		assertEquals( false, stringlong.isNil() );
+		assertEquals( false, stringdouble.isNil() );
+		assertEquals( false, thread.isNil() );
+		assertEquals( false, table.isNil() );
+		assertEquals( false, userdataobj.isNil() );
+		assertEquals( false, userdatacls.isNil() );
+		assertEquals( false, somefunc.isNil() );
+		assertEquals( false, someclosure.isNil() );
 	}
 
 	public void testIsNumber() {
@@ -915,23 +915,23 @@ public class TypeTest extends TestCase {
 	}
 
 	public void testCheckBoolean() {
-		throwsErrorReq( somenil, "checkboolean" );
-		assertEquals( true, sometrue.checkboolean() );
-		assertEquals( false, somefalse.checkboolean() );
-		throwsErrorReq( zero, "checkboolean" );
-		throwsErrorReq( intint, "checkboolean" );
-		throwsErrorReq( longdouble, "checkboolean" );
-		throwsErrorReq( doubledouble, "checkboolean" );
-		throwsErrorReq( somefunc, "checkboolean" );
-		throwsErrorReq( someclosure, "checkboolean" );
-		throwsErrorReq( stringstring, "checkboolean" );
-		throwsErrorReq( stringint, "checkboolean" );
-		throwsErrorReq( stringlong, "checkboolean" );
-		throwsErrorReq( stringdouble, "checkboolean" );
-		throwsErrorReq( thread, "checkboolean" );
-		throwsErrorReq( table, "checkboolean" );
-		throwsErrorReq( userdataobj, "checkboolean" );
-		throwsErrorReq( userdatacls, "checkboolean" );
+		throwsErrorReq( somenil, "checkBoolean" );
+		assertEquals( true, sometrue.checkBoolean() );
+		assertEquals( false, somefalse.checkBoolean() );
+		throwsErrorReq( zero, "checkBoolean" );
+		throwsErrorReq( intint, "checkBoolean" );
+		throwsErrorReq( longdouble, "checkBoolean" );
+		throwsErrorReq( doubledouble, "checkBoolean" );
+		throwsErrorReq( somefunc, "checkBoolean" );
+		throwsErrorReq( someclosure, "checkBoolean" );
+		throwsErrorReq( stringstring, "checkBoolean" );
+		throwsErrorReq( stringint, "checkBoolean" );
+		throwsErrorReq( stringlong, "checkBoolean" );
+		throwsErrorReq( stringdouble, "checkBoolean" );
+		throwsErrorReq( thread, "checkBoolean" );
+		throwsErrorReq( table, "checkBoolean" );
+		throwsErrorReq( userdataobj, "checkBoolean" );
+		throwsErrorReq( userdatacls, "checkBoolean" );
 	}
 
 	public void testCheckClosure() {

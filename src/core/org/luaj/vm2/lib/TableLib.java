@@ -136,7 +136,7 @@ public class TableLib extends TwoArgFunction {
 	static class sort extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
 			args.arg1().checktable().sort(
-					args.arg(2).isnil()? NIL: args.arg(2).checkFunction());
+					args.arg(2).isNil()? NIL: args.arg(2).checkFunction());
 			return NONE;
 		}
 	}

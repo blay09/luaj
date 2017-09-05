@@ -23,9 +23,6 @@ package org.luaj.vm2;
 
 import junit.framework.TestCase;
 
-import org.luaj.vm2.LuaString;
-import org.luaj.vm2.LuaTable;
-import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
 
 /**
@@ -257,7 +254,7 @@ public class TableHashTest extends TestCase {
 		t.set( LuaValue.valueOf(63), LuaValue.valueOf("11") );
 
 		Varargs entry = t.next(LuaValue.NIL);
-		while ( !entry.isnil(1) ) {
+		while ( !entry.isNil(1) ) {
 			LuaValue k = entry.arg1();
 			LuaValue v = entry.arg(2);
 			if ( ( k.toint() & 1 ) == 0 ) {
@@ -268,7 +265,7 @@ public class TableHashTest extends TestCase {
 
 		int numEntries = 0;
 		entry = t.next(LuaValue.NIL);
-		while ( !entry.isnil(1) ) {
+		while ( !entry.isNil(1) ) {
 			LuaValue k = entry.arg1();
 			// Only odd keys should remain
 			assertTrue( ( k.toint() & 1 ) == 1 );
@@ -293,7 +290,7 @@ public class TableHashTest extends TestCase {
 
 		Varargs entry = t.next(LuaValue.NIL);
 		Varargs entry2 = entry;
-		while ( !entry.isnil(1) ) {
+		while ( !entry.isNil(1) ) {
 			LuaValue k = entry.arg1();
 			LuaValue v = entry.arg(2);
 			if ( ( k.toint() & 1 ) == 0 ) {
@@ -307,7 +304,7 @@ public class TableHashTest extends TestCase {
 
 		int numEntries = 0;
 		entry = t.next(LuaValue.NIL);
-		while ( !entry.isnil(1) ) {
+		while ( !entry.isNil(1) ) {
 			LuaValue k = entry.arg1();
 			// Only odd keys should remain
 			assertTrue( ( k.toint() & 1 ) == 1 );

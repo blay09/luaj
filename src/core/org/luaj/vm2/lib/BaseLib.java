@@ -161,19 +161,19 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 	// "dofile", // ( filename ) -> result1, ...
 	final class dofile extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			args.argcheck(args.isString(1) || args.isnil(1), 1, "filename must be string or nil");
+			args.argcheck(args.isString(1) || args.isNil(1), 1, "filename must be string or nil");
 			String filename = args.isString(1)? args.tojstring(1): null;
 			Varargs v = filename == null? 
 					loadStream( globals.STDIN, "=stdin", "bt", globals ):
 					loadFile( args.checkString(1), "bt", globals );
-			return v.isnil(1)? error(v.tojstring(2)): v.arg1().invoke();			
+			return v.isNil(1)? error(v.tojstring(2)): v.arg1().invoke();
 		}
 	}
 
 	// "error", // ( message [,level] ) -> ERR
 	static final class error extends TwoArgFunction {
 		public LuaValue call(LuaValue arg1, LuaValue arg2) {
-			throw arg1.isnil()? new LuaError(null, arg2.optint(1)): 
+			throw arg1.isNil()? new LuaError(null, arg2.optint(1)):
 				arg1.isstring()? new LuaError(arg1.tojstring(), arg2.optint(1)): 
 					new LuaError(arg1);
 		}
@@ -205,7 +205,7 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 	// "loadfile", // ( [filename [, mode [, env]]] ) -> chunk | nil, msg
 	final class loadfile extends VarArgFunction {
 		public Varargs invoke(Varargs args) {
-			args.argcheck(args.isString(1) || args.isnil(1), 1, "filename must be string or nil");
+			args.argcheck(args.isString(1) || args.isNil(1), 1, "filename must be string or nil");
 			String filename = args.isString(1)? args.tojstring(1): null;
 			String mode = args.optjstring(2, "bt");
 			LuaValue env = args.optvalue(3, globals);
@@ -324,9 +324,9 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 		}
 		public LuaValue call(LuaValue table, LuaValue metatable) {
 			final LuaValue mt0 = table.checktable().getmetatable();
-			if ( mt0!=null && !mt0.rawget(METATABLE).isnil() )
+			if ( mt0!=null && !mt0.rawget(METATABLE).isNil() )
 				error("cannot change a protected metatable");
-			return table.setmetatable(metatable.isnil()? null: metatable.checktable());
+			return table.setmetatable(metatable.isNil()? null: metatable.checktable());
 		}
 	}
 	
@@ -336,7 +336,7 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 			return e.tonumber();
 		}
 		public LuaValue call(LuaValue e, LuaValue base) {
-			if (base.isnil())
+			if (base.isNil())
 				return e.tonumber();
 			final int b = base.checkInt();
 			if ( b < 2 || b > 36 )
@@ -349,10 +349,10 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 	static final class tostring extends LibFunction {
 		public LuaValue call(LuaValue arg) {
 			LuaValue h = arg.metatag(TOSTRING);
-			if ( ! h.isnil() ) 
+			if ( ! h.isNil() )
 				return h.call(arg);
 			LuaValue v = arg.tostring();
-			if ( ! v.isnil() ) 
+			if ( ! v.isNil() )
 				return v;
 			return valueOf(arg.tojstring());
 		}
@@ -467,7 +467,7 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 		public int read() throws IOException {
 			if ( remaining <= 0 ) {
 				LuaValue s = func.call();
-				if ( s.isnil() )
+				if ( s.isNil() )
 					return -1;
 				LuaString ls = s.strvalue();
 				bytes = ls.m_bytes;

@@ -230,9 +230,9 @@ public class LuajavaClassMembersTest extends TestCase {
 		C c = new C();
 		JavaInstance ic = new JavaInstance(c);
 		LuaValue d = ic.get("D");
-		assertFalse(d.isnil());
+		assertFalse(d.isNil());
 		assertSame(d, JavaClass.forClass(C.D.class));
 		LuaValue e = ic.get("E");
-		assertTrue(e.isnil());
+		assertTrue(e.isNil());
 	}
 }

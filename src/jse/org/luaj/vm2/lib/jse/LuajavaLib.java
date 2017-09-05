@@ -188,7 +188,7 @@ public class LuajavaLib extends VarArgFunction {
 		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 			String name = method.getName();
 			LuaValue func = lobj.get(name);
-			if ( func.isnil() )
+			if ( func.isNil() )
 				return null;
 			boolean isvarargs = ((method.getModifiers() & METHOD_MODIFIERS_VARARGS) != 0);
 			int n = args!=null? args.length: 0; 

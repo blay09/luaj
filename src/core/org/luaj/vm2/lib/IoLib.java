@@ -330,14 +330,14 @@ public class IoLib extends TwoArgFunction {
 
 	//	io.close([file]) -> void
 	public Varargs _io_close(LuaValue file) throws IOException {
-		File f = file.isnil()? output(): checkfile(file);
+		File f = file.isNil()? output(): checkfile(file);
 		checkopen(f);
 		return ioclose(f);
 	}
 
 	//	io.input([file]) -> file
 	public Varargs _io_input(LuaValue file) {
-		infile = file.isnil()? input(): 
+		infile = file.isNil()? input():
 				file.isstring()? ioopenfile(FTYPE_NAMED, file.checkString(),"r"):
 				checkfile(file);
 		return infile;
@@ -345,7 +345,7 @@ public class IoLib extends TwoArgFunction {
 
 	// io.output(filename) -> file
 	public Varargs _io_output(LuaValue filename) {
-		outfile = filename.isnil()? output(): 
+		outfile = filename.isNil()? output():
 				  filename.isstring()? ioopenfile(FTYPE_NAMED, filename.checkString(),"w"):
 				  checkfile(filename);
 		return outfile;
@@ -512,7 +512,7 @@ public class IoLib extends TwoArgFunction {
 				default: 
 					return argerror( i+1, "(invalid format)" ); 
 			}
-			if ( (v[i++] = vi).isnil() )
+			if ( (v[i++] = vi).isNil() )
 				break;
 		}
 		return i==0? NIL: varargsOf(v, 0, i);

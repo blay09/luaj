@@ -93,7 +93,7 @@ public final class LuaBoolean extends LuaValue {
 		return this.v;
 	}
 	
-	public boolean checkboolean() {
+	public boolean checkBoolean() {
 		return v;
 	}
 	

@@ -45,7 +45,7 @@ public class TableTest extends TestCase {
 		LuaValue k = LuaValue.NIL;
 		while ( true ) {
 			Varargs n = t.next(k);
-			if ( (k = n.arg1()).isnil() )
+			if ( (k = n.arg1()).isNil() )
 				break;
 			l.add( k );
 		}
@@ -400,18 +400,18 @@ public class TableTest extends TestCase {
 		java.util.List<String> expected = new java.util.ArrayList<String>();
 		Varargs n;
 		int i;
-		for (n = t.next(LuaValue.NIL), i = 0; !n.arg1().isnil(); n = t.next(n.arg1()), ++i) {
+		for (n = t.next(LuaValue.NIL), i = 0; !n.arg1().isNil(); n = t.next(n.arg1()), ++i) {
 			if (i % 2 == 0)
 				expected.add(n.arg1() + "=" + n.arg(2));
 		}
 		// Remove every other key while iterating over the table.
-		for (n = t.next(LuaValue.NIL), i = 0; !n.arg1().isnil(); n = t.next(n.arg1()), ++i) {
+		for (n = t.next(LuaValue.NIL), i = 0; !n.arg1().isNil(); n = t.next(n.arg1()), ++i) {
 			if (i % 2 != 0)
 				t.set(n.arg1(), LuaValue.NIL);
 		}
 		// Iterate over remaining table, and form list of entries still in table.
 		java.util.List<String> actual = new java.util.ArrayList<String>();
-		for (n = t.next(LuaValue.NIL); !n.arg1().isnil(); n = t.next(n.arg1())) {
+		for (n = t.next(LuaValue.NIL); !n.arg1().isNil(); n = t.next(n.arg1())) {
 			actual.add(n.arg1() + "=" + n.arg(2));
 		}
 		assertEquals(expected, actual);

@@ -107,7 +107,7 @@ public abstract class Varargs {
 	 * @return true if the argument is nil or does not exist, false otherwise
 	 * @see LuaValue#TNIL
 	 * */
-	public boolean isnil(int i)        { return arg(i).isnil(); }
+	public boolean isNil(int i)        { return arg(i).isNil(); }
 
 	/** Tests if argument i is a function.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -277,7 +277,7 @@ public abstract class Varargs {
 	 * @return true if argument i is boolean true, false if it is false
 	 * @exception LuaError if the argument is not a lua boolean
 	 * */
-	public boolean      checkboolean(int i)          { return arg(i).checkboolean(); }
+	public boolean checkBoolean(int i)          { return arg(i).checkBoolean(); }
 
 	/** Return argument i as a closure, or throw an error if any other type.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -401,7 +401,7 @@ public abstract class Varargs {
 	 * @return true if argument i contains either no argument or nil
 	 * */
 	public boolean isnoneornil(int i) {
-		return i>narg() || arg(i).isnil();
+		return i>narg() || arg(i).isNil();
 	}
 	
 	/** Convert argument {@code i} to java boolean based on lua rules for boolean evaluation. 
@@ -571,7 +571,7 @@ public abstract class Varargs {
 		public int narg() {
 			return 1+v2.narg();
 		}
-		public LuaValue arg1() { 
+		public LuaValue arg1() {
 			return v1; 
 		}
 		public Varargs subargs(final int start) {
@@ -676,8 +676,8 @@ public abstract class Varargs {
 		public int narg() {
 			return length + more.narg();
 		}
-		public LuaValue arg1() { 
-			return length>0? v[offset]: more.arg1(); 
+		public LuaValue arg1() {
+			return length>0? v[offset]: more.arg1();
 		}
 		public Varargs subargs(int start) {
 			if (start <= 0)

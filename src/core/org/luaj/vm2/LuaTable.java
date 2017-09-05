@@ -49,7 +49,7 @@ import java.util.Vector;
  * LuaValue k = LuaValue.NIL;
  * while ( true ) {
  *    Varargs n = table.next(k);
- *    if ( (k = n.arg1()).isnil() )
+ *    if ( (k = n.arg1()).isNil() )
  *       break;
  *    LuaValue v = n.arg(2)
  *    process( k, v )
@@ -118,7 +118,7 @@ public class LuaTable extends LuaValue implements Metatable {
 			for ( int i=1,n=lastarg.narg(); i<=n; ++i )
 				rawset(nu+i,lastarg.arg(i));
 		for ( int i=0; i<nn; i+=2 )
-			if (!named[i+1].isnil())
+			if (!named[i+1].isNil())
 				rawset(named[i], named[i+1]);
 	}
 
@@ -219,12 +219,12 @@ public class LuaTable extends LuaValue implements Metatable {
 	
 	public LuaValue get( int key ) {
 		LuaValue v = rawget(key);
-		return v.isnil() && m_metatable!=null? gettable(this,valueOf(key)): v;
+		return v.isNil() && m_metatable!=null? gettable(this,valueOf(key)): v;
 	}
 	
 	public LuaValue get( LuaValue key ) {
 		LuaValue v = rawget(key);
-		return v.isnil() && m_metatable!=null? gettable(this,key): v;
+		return v.isNil() && m_metatable!=null? gettable(this,key): v;
 	}
 
 	public LuaValue rawget( int key ) {
@@ -260,7 +260,7 @@ public class LuaTable extends LuaValue implements Metatable {
 	}
 
 	public void set( int key, LuaValue value ) {
-		if ( m_metatable==null || ! rawget(key).isnil() || ! settable(this,LuaInteger.valueOf(key),value) )
+		if ( m_metatable==null || ! rawget(key).isNil() || ! settable(this,LuaInteger.valueOf(key),value) )
 			rawset(key, value);
 	}
 
@@ -268,7 +268,7 @@ public class LuaTable extends LuaValue implements Metatable {
 	public void set( LuaValue key, LuaValue value ) {
 		if (!key.isvalidkey() && !metatag(NEWINDEX).isFunction())
 			typerror("table index");
-		if ( m_metatable==null || ! rawget(key).isnil() ||  ! settable(this,key,value) )
+		if ( m_metatable==null || ! rawget(key).isNil() ||  ! settable(this,key,value) )
 			rawset(key, value);
 	}
 
@@ -286,7 +286,7 @@ public class LuaTable extends LuaValue implements Metatable {
 	/** Set an array element */
 	private boolean arrayset( int key, LuaValue value ) {
 		if ( key>0 && key<=array.length ) {
-			array[key - 1] = value.isnil() ? null :
+			array[key - 1] = value.isNil() ? null :
 				(m_metatable != null ? m_metatable.wrap(value) : value);
 			return true;
 		}
@@ -305,11 +305,11 @@ public class LuaTable extends LuaValue implements Metatable {
 		else if (pos > n)
 			return NONE;
 		LuaValue v = rawget(pos);
-		for ( LuaValue r=v; !r.isnil(); ) {
+		for ( LuaValue r=v; !r.isNil(); ) {
 			r = rawget(pos+1);
 			rawset(pos++, r);
 		}
-		return v.isnil()? NONE: v;
+		return v.isNil()? NONE: v;
 	}
 
 	/** Insert an element at a position in a list-table
@@ -320,7 +320,7 @@ public class LuaTable extends LuaValue implements Metatable {
 	public void insert(int pos, LuaValue value) {
 		if ( pos == 0 )
 			pos = rawlen()+1;
-		while ( ! value.isnil() ) {
+		while ( ! value.isNil() ) {
 			LuaValue v = rawget( pos );
 			rawset(pos++, value);
 			value = v;
@@ -360,13 +360,13 @@ public class LuaTable extends LuaValue implements Metatable {
 	public int rawlen() { 
 		int a = getArrayLength();
 		int n = a+1,m=0;
-		while ( !rawget(n).isnil() ) {
+		while ( !rawget(n).isNil() ) {
 			m = n;
 			n += a+getHashLength()+1;
 		}
 		while ( n > m+1 ) {
 			int k = (n+m) / 2;
-			if ( !rawget(k).isnil() )
+			if ( !rawget(k).isNil() )
 				m = k;
 			else
 				n = k;
@@ -382,7 +382,7 @@ public class LuaTable extends LuaValue implements Metatable {
 		int i = 0;
 		do {
 			// find current key index
-			if ( ! key.isnil() ) {
+			if ( ! key.isNil() ) {
 				if ( key.isinttype() ) {
 					i = key.toint();
 					if ( i>0 && i<=array.length ) {
@@ -443,7 +443,7 @@ public class LuaTable extends LuaValue implements Metatable {
 	public Varargs inext(LuaValue key) {
 		int k = key.checkInt() + 1;
 		LuaValue v = rawget(k);
-		return v.isnil()? NONE: varargsOf(LuaInteger.valueOf(k),v);
+		return v.isNil()? NONE: varargsOf(LuaInteger.valueOf(k),v);
 	}
 
 	/**
@@ -452,7 +452,7 @@ public class LuaTable extends LuaValue implements Metatable {
 	 * @param value value to set
 	 */
 	public void hashset(LuaValue key, LuaValue value) {
-		if ( value.isnil() )
+		if ( value.isNil() )
 			hashRemove(key);
 		else {
 			int index = 0;
@@ -827,7 +827,7 @@ public class LuaTable extends LuaValue implements Metatable {
 		}
 		if ( a == null || b == null )
 			return false;
-		if ( ! cmpfunc.isnil() ) {
+		if ( ! cmpfunc.isNil() ) {
 			return cmpfunc.call(a,b).toboolean();
 		} else {
 			return a.lt_b(b);
@@ -848,7 +848,7 @@ public class LuaTable extends LuaValue implements Metatable {
 		LuaValue k = LuaValue.NIL;
 		for ( int i=0; true; i++ ) {
 			Varargs n = next(k);
-			if ( (k = n.arg1()).isnil() )
+			if ( (k = n.arg1()).isNil() )
 				return i;
 		}
 	}
@@ -862,7 +862,7 @@ public class LuaTable extends LuaValue implements Metatable {
 		LuaValue k = LuaValue.NIL;
 		while ( true ) {
 			Varargs n = next(k);
-			if ( (k = n.arg1()).isnil() )
+			if ( (k = n.arg1()).isNil() )
 				break;
 			l.addElement( k );
 		}
@@ -1232,7 +1232,7 @@ public class LuaTable extends LuaValue implements Metatable {
 
 		public Entry set(LuaValue value) {
 			LuaValue n = value.tonumber();
-			if ( !n.isnil() ) {
+			if ( !n.isNil() ) {
 				this.value = n.todouble();
 				return this;
 			} else {

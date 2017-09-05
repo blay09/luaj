@@ -141,7 +141,7 @@ public class SampleSandboxed {
 	static class ReadOnlyLuaTable extends LuaTable {
 		public ReadOnlyLuaTable(LuaValue table) {
 			presize(table.length(), 0);
-			for (Varargs n = table.next(LuaValue.NIL); !n.arg1().isnil(); n = table
+			for (Varargs n = table.next(LuaValue.NIL); !n.arg1().isNil(); n = table
 					.next(n.arg1())) {
 				LuaValue key = n.arg1();
 				LuaValue value = n.arg(2);

@@ -209,7 +209,7 @@ public class PackageLib extends TwoArgFunction {
 			Varargs loader = null;
 			for ( int i=1; true; i++ ) {
 				LuaValue searcher = tbl.get(i);
-				if ( searcher.isnil() ) {
+				if ( searcher.isNil() ) {
 					error( "module '"+name+"' not found: "+name+sb );				
 			    }
 							
@@ -224,7 +224,7 @@ public class PackageLib extends TwoArgFunction {
 			// load the module using the loader
 			loaded.set(name, _SENTINEL);
 			result = loader.arg1().call(name, loader.arg(2));
-			if ( ! result.isnil() )
+			if ( ! result.isNil() )
 				loaded.set( name, result );
 			else if ( (result = loaded.get(name)) == _SENTINEL ) 
 				loaded.set( name, result = LuaValue.TRUE );
@@ -243,7 +243,7 @@ public class PackageLib extends TwoArgFunction {
 		public Varargs invoke(Varargs args) {
 			LuaString name = args.checkLuaString(1);
 			LuaValue val = package_.get(_PRELOAD).get(name);
-			return val.isnil()? 
+			return val.isNil()?
 				valueOf("\n\tno field package.preload['"+name+"']"):
 				val;
 		}

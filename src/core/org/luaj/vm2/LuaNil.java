@@ -31,7 +31,7 @@ package org.luaj.vm2;
  * is also considered treated as a nil value by default.  
  * <p>
  * Although it is possible to test for nil using Java == operator, 
- * the recommended approach is to use the method {@link LuaValue#isnil()} 
+ * the recommended approach is to use the method {@link LuaValue#isNil()}
  * instead.  By using that any ambiguities between 
  * {@link LuaValue#NIL} and {@link LuaValue#NONE} are avoided.
  * @see LuaValue
@@ -69,7 +69,7 @@ public class LuaNil extends LuaValue {
 		return false; 
 	}
 	
-	public boolean isnil() {
+	public boolean isNil() {
 		return true;
 	}
 		

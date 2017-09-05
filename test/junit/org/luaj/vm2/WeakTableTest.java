@@ -102,7 +102,7 @@ abstract public class WeakTableTest extends TableTest {
 			assertEquals(LuaValue.NIL, t.get("table"));
 			assertEquals(LuaValue.NIL, t.get("userdata"));
 			assertEquals(LuaValue.NIL, t.get(1));
-			assertFalse("strings should not be in weak references", t.get("string").isnil());
+			assertFalse("strings should not be in weak references", t.get("string").isNil());
 		}
 	}
 	
@@ -165,7 +165,7 @@ abstract public class WeakTableTest extends TableTest {
 			
 			// table should have 2 entries
 			int size = 0;
-			for ( LuaValue k = t.next(LuaValue.NIL).arg1(); !k.isnil();
+			for ( LuaValue k = t.next(LuaValue.NIL).arg1(); !k.isNil();
 					k = t.next(k).arg1() ) {
 				size++;
 			}
@@ -251,7 +251,7 @@ abstract public class WeakTableTest extends TableTest {
 			// table should have 3 entries
 			int size = 0;
 			for ( LuaValue k = t.next(LuaValue.NIL).arg1();
-				  !k.isnil() && size < 1000;
+				  !k.isNil() && size < 1000;
 				  k = t.next(k).arg1() ) {
 				size++;
 			}
