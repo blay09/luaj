@@ -30,7 +30,7 @@ package org.luaj.vm2;
  * 
  * <p>
  * Generally, the {@link Prototype} is not constructed directly is an intermediate result
- * as lua code is loaded using {@link Globals#load(java.io.Reader, String)}:
+ * as lua code is loaded using {@link LuaState#load(java.io.Reader, String)}:
  * <pre> {@code
  * Globals globals = JsePlatform.standardGlobals();
  * globals.load( new StringReader("print 'hello'"), "main.lua" ).call(); 
@@ -44,18 +44,18 @@ package org.luaj.vm2;
  * Prototype p = LuaC.instance.compile(is, "script");
  * }</pre> 
  * 
- * To simplify loading, the {@link Globals#compilePrototype(java.io.InputStream, String)} method may be used: 
+ * To simplify loading, the {@link LuaState#compilePrototype(java.io.InputStream, String)} method may be used:
  * <pre> {@code
  * Prototype p = globals.compileProtoytpe(is, "script");
  * }</pre>
  * 
- * It may also be loaded from a {@link java.io.Reader} via {@link Globals#compilePrototype(java.io.Reader, String)}: 
+ * It may also be loaded from a {@link java.io.Reader} via {@link LuaState#compilePrototype(java.io.Reader, String)}:
  * <pre> {@code
  * Prototype p = globals.compileProtoytpe(new StringReader(script), "script");
  * }</pre>
  * 
  * To un-dump a binary file known to be a binary lua file that has been dumped to a string,
- * the {@link Globals.Undumper} interface may be used: 
+ * the {@link LuaState.Undumper} interface may be used:
  * <pre> {@code
  * FileInputStream lua_binary_file = new FileInputStream("foo.lc");  // Known to be compiled lua.
  * Prototype p = globals.undumper.undump(lua_binary_file, "foo.lua");
@@ -76,9 +76,9 @@ package org.luaj.vm2;
  * <p>
  *  
  * @see LuaClosure
- * @see Globals
- * @see Globals#undumper
- * @see Globals#compiler
+ * @see LuaState
+ * @see LuaState#undumper
+ * @see LuaState#compiler
  * @see Print#print
  */
 

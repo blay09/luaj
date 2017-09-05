@@ -199,7 +199,7 @@ public class CoerceLuaToJava {
 		public int score(LuaValue value) {
 			switch ( value.type() ) {
 			case LuaValue.TSTRING:
-				return value.checkstring().isValidUtf8()?
+				return value.checkLuaString().isValidUtf8()?
 						(targetType==TARGET_TYPE_STRING? 0: 1):
 						(targetType==TARGET_TYPE_BYTES? 0: SCORE_WRONG_TYPE);
 			case LuaValue.TNIL:
@@ -213,7 +213,7 @@ public class CoerceLuaToJava {
 				return null;
 			if ( targetType == TARGET_TYPE_STRING )
 				return value.tojstring();
-			LuaString s = value.checkstring();
+			LuaString s = value.checkLuaString();
 			byte[] b = new byte[s.m_length];
 			s.copyInto(0, b, 0, b.length);
 			return b;

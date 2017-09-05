@@ -48,7 +48,7 @@ public class ScriptDrivenTest extends TestCase implements ResourceFinder {
 	
 	private final PlatformType platform;
 	private final String subdir;
-	protected Globals globals;
+	protected LuaState globals;
 	
 	static final String zipdir = "test/lua/";
 	static final String zipfile = "luaj3.0-tests.zip";
@@ -177,7 +177,7 @@ public class ScriptDrivenTest extends TestCase implements ResourceFinder {
 		}
 	}
 
-	protected LuaValue loadScript(String name, Globals globals) throws IOException {
+	protected LuaValue loadScript(String name, LuaState globals) throws IOException {
 		InputStream script = this.findResource(name+".lua");
 		if ( script == null )
 			fail("Could not load script for test case: " + name);

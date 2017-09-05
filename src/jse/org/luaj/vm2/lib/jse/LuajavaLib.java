@@ -28,7 +28,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -53,7 +53,7 @@ import org.luaj.vm2.lib.VarArgFunction;
  * } </pre>
  * <p>
  * To instantiate and use it directly, 
- * link it into your globals table via {@link Globals#load} using code such as:
+ * link it into your globals table via {@link LuaState#load} using code such as:
  * <pre> {@code
  * Globals globals = new Globals();
  * globals.load(new JseBaseLib());
@@ -123,7 +123,7 @@ public class LuajavaLib extends VarArgFunction {
 			case NEW: {
 				// get constructor
 				final LuaValue c = args.checkvalue(1); 
-				final Class clazz = (opcode==NEWINSTANCE? classForName(c.tojstring()): (Class) c.checkuserdata(Class.class));
+				final Class clazz = (opcode==NEWINSTANCE? classForName(c.tojstring()): (Class) c.checkUserdata(Class.class));
 				final Varargs consargs = args.subargs(2);
 				return JavaClass.forClass(clazz).getConstructor().invoke(consargs);
 			}

@@ -89,7 +89,7 @@ public final class LuaBoolean extends LuaValue {
 		return v ? "true" : "false";
 	}
 
-	public boolean optboolean(boolean defval) {
+	public boolean booleanOrElse(boolean defval) {
 		return this.v;
 	}
 	

@@ -30,7 +30,7 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.Lua;
 import org.luaj.vm2.lib.jse.JsePlatform;
 import org.luaj.vm2.luajc.LuaJC;
@@ -68,7 +68,7 @@ public class luajc {
 	private String encoding = null;
 	private String pkgprefix = null;
 	private List files = new ArrayList();
-	private Globals globals;
+	private LuaState globals;
 
 	public static void main( String[] args ) throws IOException {
 		new luajc( args );

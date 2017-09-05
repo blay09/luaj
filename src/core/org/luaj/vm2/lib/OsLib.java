@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.luaj.vm2.Buffer;
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
@@ -112,7 +112,7 @@ public class OsLib extends TwoArgFunction {
 	private static final long t0 = System.currentTimeMillis();
 	private static long tmpnames = t0;
 
-	protected Globals globals;
+	protected LuaState globals;
 	
 	/** 
 	 * Create and OsLib instance.   
@@ -491,9 +491,9 @@ public class OsLib extends TwoArgFunction {
 			d = new java.util.Date();
 		} else {
 			Calendar c = Calendar.getInstance();
-			c.set(Calendar.YEAR, table.get("year").checkint());
-			c.set(Calendar.MONTH, table.get("month").checkint()-1);
-			c.set(Calendar.DAY_OF_MONTH, table.get("day").checkint());
+			c.set(Calendar.YEAR, table.get("year").checkInt());
+			c.set(Calendar.MONTH, table.get("month").checkInt()-1);
+			c.set(Calendar.DAY_OF_MONTH, table.get("day").checkInt());
 			c.set(Calendar.HOUR_OF_DAY, table.get("hour").optint(12));
 			c.set(Calendar.MINUTE, table.get("min").optint(0));
 			c.set(Calendar.SECOND, table.get("sec").optint(0));

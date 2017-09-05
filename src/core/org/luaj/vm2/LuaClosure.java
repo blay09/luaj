@@ -26,14 +26,14 @@ package org.luaj.vm2;
  * <p>
  * A {@link LuaClosure} is a combination of a {@link Prototype} 
  * and a {@link LuaValue} to use as an environment for execution.
- * Normally the {@link LuaValue} is a {@link Globals} in which case the environment
+ * Normally the {@link LuaValue} is a {@link LuaState} in which case the environment
  * will contain standard lua libraries. 
  * 
  * <p>
  * There are three main ways {@link LuaClosure} instances are created:
  * <ul> 
  * <li>Construct an instance using {@link #LuaClosure(Prototype, LuaValue)}</li>
- * <li>Construct it indirectly by loading a chunk via {@link Globals#load(java.io.Reader, String)}
+ * <li>Construct it indirectly by loading a chunk via {@link LuaState#load(java.io.Reader, String)}
  * <li>Execute the lua bytecode {@link Lua#OP_CLOSURE} as part of bytecode processing
  * </ul>
  * <p>
@@ -48,7 +48,7 @@ package org.luaj.vm2;
  * f.call();
  * }</pre> 
  * <p>
- * To construct it indirectly, the {@link Globals#load(java.io.Reader, String)} method may be used: 
+ * To construct it indirectly, the {@link LuaState#load(java.io.Reader, String)} method may be used:
  * <pre> {@code
  * Globals globals = JsePlatform.standardGlobals();
  * LuaFunction f = globals.load(new StringReader(script), "script");
@@ -79,7 +79,7 @@ package org.luaj.vm2;
  * @see LuaValue#checkclosure()
  * @see LuaValue#optclosure(LuaClosure)
  * @see LoadState
- * @see Globals#compiler
+ * @see LuaState#compiler
  */
 public class LuaClosure extends LuaFunction {
 	private static final UpValue[] NOUPVALUES = new UpValue[0];
@@ -88,7 +88,7 @@ public class LuaClosure extends LuaFunction {
 
 	public UpValue[] upValues;
 	
-	final Globals globals;
+	final LuaState globals;
 	
 	/** Create a closure around a Prototype with a specific environment.
 	 * If the prototype has upvalues, the environment will be written into the first upvalue.
@@ -103,7 +103,7 @@ public class LuaClosure extends LuaFunction {
 			this.upValues = new UpValue[p.upvalues.length];
 			this.upValues[0] = new UpValue(new LuaValue[] {env}, 0);
 		}
-		globals = env instanceof Globals? (Globals) env: null;	
+		globals = env instanceof LuaState ? (LuaState) env: null;
 	}
 	
 	public boolean isclosure() {

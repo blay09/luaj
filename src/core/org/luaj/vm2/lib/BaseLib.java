@@ -24,7 +24,7 @@ package org.luaj.vm2.lib;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.Lua;
 import org.luaj.vm2.LuaError;
 import org.luaj.vm2.LuaString;
@@ -38,7 +38,7 @@ import org.luaj.vm2.Varargs;
  * <p>
  * This contains all library functions listed as "basic functions" in the lua documentation for JME. 
  * The functions dofile and loadfile use the 
- * {@link Globals#finder} instance to find resource files.
+ * {@link LuaState#finder} instance to find resource files.
  * Since JME has no file system by default, {@link BaseLib} implements 
  * {@link ResourceFinder} using {@link Class#getResource(String)}, 
  * which is the closest equivalent on JME.     
@@ -57,7 +57,7 @@ import org.luaj.vm2.Varargs;
  * <p>
  * For special cases where the smallest possible footprint is desired, 
  * a minimal set of libraries could be loaded
- * directly via {@link Globals#load(LuaValue)} using code such as:
+ * directly via {@link LuaState#load(LuaValue)} using code such as:
  * <pre> {@code
  * Globals globals = new Globals();
  * globals.load(new JseBaseLib());
@@ -69,7 +69,7 @@ import org.luaj.vm2.Varargs;
  * This is a direct port of the corresponding library in C.
  * @see org.luaj.vm2.lib.jse.JseBaseLib
  * @see ResourceFinder
- * @see Globals#finder
+ * @see LuaState#finder
  * @see LibFunction
  * @see org.luaj.vm2.lib.jse.JsePlatform
  * @see org.luaj.vm2.lib.jme.JmePlatform
@@ -77,7 +77,7 @@ import org.luaj.vm2.Varargs;
  */
 public class BaseLib extends TwoArgFunction implements ResourceFinder {
 	
-	Globals globals;
+	LuaState globals;
 	
 
 	/** Perform one-time initialization on the library by adding base functions
@@ -338,10 +338,10 @@ public class BaseLib extends TwoArgFunction implements ResourceFinder {
 		public LuaValue call(LuaValue e, LuaValue base) {
 			if (base.isnil())
 				return e.tonumber();
-			final int b = base.checkint();
+			final int b = base.checkInt();
 			if ( b < 2 || b > 36 )
 				argerror(2, "base out of range");
-			return e.checkstring().tonumber(b);
+			return e.checkLuaString().tonumber(b);
 		}
 	}
 	

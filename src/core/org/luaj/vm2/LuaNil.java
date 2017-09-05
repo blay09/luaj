@@ -90,10 +90,10 @@ public class LuaNil extends LuaValue {
 	}
 
 	// optional argument conversions - nil alwas falls badk to default value
-	public boolean     optboolean(boolean defval)          { return defval; }
+	public boolean booleanOrElse(boolean defval)          { return defval; }
 	public LuaClosure  optclosure(LuaClosure defval)       { return defval; }
 	public double      optdouble(double defval)               { return defval; }
-	public LuaFunction optfunction(LuaFunction defval)     { return defval; }
+	public LuaFunction functionOrElse(LuaFunction defval)     { return defval; }
 	public int         optint(int defval)                  { return defval; }
 	public LuaInteger  optinteger(LuaInteger defval)       { return defval; }
 	public long        optlong(long defval)                { return defval; }

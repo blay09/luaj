@@ -28,7 +28,6 @@ import java.lang.reflect.InvocationTargetException;
 import junit.framework.TestCase;
 
 import org.luaj.vm2.TypeTest.MyData;
-import org.luaj.vm2.compiler.LuaC;
 import org.luaj.vm2.lib.ZeroArgFunction;
 
 public class LuaOperationsTest extends TestCase {
@@ -56,7 +55,7 @@ public class LuaOperationsTest extends TestCase {
 	private final LuaValue stringdouble  = LuaValue.valueOf(samplestringdouble);
 	private final LuaTable    table         = LuaValue.listOf( new LuaValue[] { LuaValue.valueOf("aaa"), LuaValue.valueOf("bbb") } );
 	private final LuaValue    somefunc      = new ZeroArgFunction() { public LuaValue call() { return NONE;}};
-	private final LuaThread   thread        = new LuaThread(new Globals(), somefunc);
+	private final LuaThread   thread        = new LuaThread(new LuaState(), somefunc);
 	private final Prototype   proto         = new Prototype(1);
 	private final LuaClosure  someclosure   = new LuaClosure(proto,table);
 	private final LuaUserdata userdataobj   = LuaValue.userdataOf(sampleobject);
@@ -130,7 +129,7 @@ public class LuaOperationsTest extends TestCase {
 
 	public Prototype createPrototype( String script, String name ) {
 		try {
-			Globals globals = org.luaj.vm2.lib.jse.JsePlatform.standardGlobals();
+			LuaState globals = org.luaj.vm2.lib.jse.JsePlatform.standardGlobals();
 			Reader reader = new StringReader(script);
 			return globals.compilePrototype(reader, name);
 		} catch (Exception e) {
@@ -146,7 +145,7 @@ public class LuaOperationsTest extends TestCase {
 		// set up suitable environments for execution
 		LuaValue aaa = LuaValue.valueOf("aaa");
 		LuaValue eee = LuaValue.valueOf("eee");
-		final Globals globals = org.luaj.vm2.lib.jse.JsePlatform.standardGlobals();
+		final LuaState globals = org.luaj.vm2.lib.jse.JsePlatform.standardGlobals();
 		LuaTable newenv = LuaValue.tableOf( new LuaValue[] { 
 				LuaValue.valueOf("a"), LuaValue.valueOf("aaa"), 
 				LuaValue.valueOf("b"), LuaValue.valueOf("bbb"), } );

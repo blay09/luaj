@@ -21,7 +21,7 @@
 ******************************************************************************/
 package org.luaj.vm2.lib;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.Lua;
 import org.luaj.vm2.LuaBoolean;
 import org.luaj.vm2.LuaClosure;
@@ -46,7 +46,7 @@ import org.luaj.vm2.Varargs;
  * To do this, it must maintain a separate stack of calls to {@link LuaClosure} and {@link LibFunction} 
  * instances.  
  * Especially when lua-to-java bytecode compiling is being used
- * via a {@link org.luaj.vm2.Globals.Compiler} such as {@link org.luaj.vm2.luajc.LuaJC}, 
+ * via a {@link LuaState.Compiler} such as {@link org.luaj.vm2.luajc.LuaJC},
  * this cannot be done in all cases.  
  * <p> 
  * Typically, this library is included as part of a call to either 
@@ -106,7 +106,7 @@ public class DebugLib extends TwoArgFunction {
 	private static final LuaString CURRENTLINE     = valueOf("currentline");  
 	private static final LuaString ACTIVELINES     = valueOf("activelines");  
 
-	Globals globals;
+	LuaState globals;
 	
 	/** Perform one-time initialization on the library by creating a table
 	 * containing the library functions, adding that table to the supplied environment,
@@ -351,7 +351,7 @@ public class DebugLib extends TwoArgFunction {
 			Object o = args.checkuserdata(1);
 			LuaValue v = args.checkvalue(2);
 			LuaUserdata u = (LuaUserdata) args.arg1();
-			u.m_instance = v.checkuserdata();
+			u.m_instance = v.checkUserdata();
 			u.m_metatable = v.getmetatable();
 			return NONE;
 		}

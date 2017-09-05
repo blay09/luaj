@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaClosure;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaString;
@@ -43,7 +43,7 @@ import org.luaj.vm2.lib.BaseLib;
  * using a user-supplied environment.  
  * 
  * <p>
- * Implements the {@link org.luaj.vm2.Globals.Compiler} interface for loading 
+ * Implements the {@link LuaState.Compiler} interface for loading
  * initialized chunks, which is an interface common to 
  * lua bytecode compiling and java bytecode compiling.
  *  
@@ -62,9 +62,9 @@ import org.luaj.vm2.lib.BaseLib;
  * LuaC.install(globals);
  * } </pre>
  * 
- * @see #install(Globals)
- * @see Globals#compiler
- * @see Globals#loader
+ * @see #install(LuaState)
+ * @see LuaState#compiler
+ * @see LuaState#loader
  * @see org.luaj.vm2.luajc.LuaJC
  * @see org.luaj.vm2.lib.jse.JsePlatform
  * @see org.luaj.vm2.lib.jme.JmePlatform
@@ -72,7 +72,7 @@ import org.luaj.vm2.lib.BaseLib;
  * @see LuaValue
  * @see Prototype
  */
-public class LuaC extends Constants implements Globals.Compiler, Globals.Loader {
+public class LuaC extends Constants implements LuaState.Compiler, LuaState.Loader {
 
 	/** A sharable instance of the LuaC compiler. */
 	public static final LuaC instance = new LuaC();
@@ -82,7 +82,7 @@ public class LuaC extends Constants implements Globals.Compiler, Globals.Loader 
 	 * not already a compiled lua chunk.
 	 * @param globals the Globals into which this is to be installed.
 	 */
-	public static void install(Globals globals) {
+	public static void install(LuaState globals) {
 		globals.compiler = instance;
 		globals.loader = instance;
 	}
@@ -107,7 +107,7 @@ public class LuaC extends Constants implements Globals.Compiler, Globals.Loader 
 	 * Use Globals.load(InputString, String, String) instead, 
 	 * or LuaC.compile(InputStream, String) and construct LuaClosure directly.
 	 */
-	public LuaValue load(InputStream stream, String chunkname, Globals globals) throws IOException {
+	public LuaValue load(InputStream stream, String chunkname, LuaState globals) throws IOException {
 		return new LuaClosure(compile(stream, chunkname), globals);
 	}
 

@@ -676,9 +676,9 @@ public class JavaBuilder {
 			if ( name == null ) {
 				name = value.type() == LuaValue.TNUMBER? 
 						value.isinttype()? 
-							createLuaIntegerField(value.checkint()):
+							createLuaIntegerField(value.checkInt()):
 							createLuaDoubleField(value.checkdouble()):
-						createLuaStringField(value.checkstring());
+						createLuaStringField(value.checkLuaString());
 				constants.put(value, name);
 			}
 			append(factory.createGetStatic(classname, name, TYPE_LUAVALUE));
@@ -717,7 +717,7 @@ public class JavaBuilder {
 		FieldGen fg = new FieldGen(Constants.ACC_STATIC | Constants.ACC_FINAL, 
 				TYPE_LUAVALUE, name, cp);
 		cg.addField(fg.getField());
-		LuaString ls = value.checkstring();
+		LuaString ls = value.checkLuaString();
 		if ( ls.isValidUtf8() ) {
 			init.append(new PUSH(cp, value.tojstring()));
 			init.append(factory.createInvoke(STR_LUASTRING, "valueOf",

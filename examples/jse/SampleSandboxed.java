@@ -17,16 +17,16 @@ import org.luaj.vm2.lib.jse.*;
  * <li>use hook functions with Errors to limit lua scripts</li>
  * <li>use read-only tables to protect shared metatables</li>
  * 
- * @see Globals
+ * @see LuaState
  * @see LuaValue
  */
 public class SampleSandboxed {
 	// These globals are used by the server to compile scripts.
-	static Globals server_globals;
+	static LuaState server_globals;
 	
 	public static void main(String[] args) {
 		// Create server globals with just enough library support to compile user scripts.
-		server_globals = new Globals();
+		server_globals = new LuaState();
 		server_globals.load(new JseBaseLib());
 		server_globals.load(new PackageLib());
 		server_globals.load(new StringLib());
@@ -77,7 +77,7 @@ public class SampleSandboxed {
 		
 		// Each script will have it's own set of globals, which should 
 		// prevent leakage between scripts running on the same server.
-		Globals user_globals = new Globals();
+		LuaState user_globals = new LuaState();
 		user_globals.load(new JseBaseLib());
 		user_globals.load(new PackageLib());
 		user_globals.load(new Bit32Lib());

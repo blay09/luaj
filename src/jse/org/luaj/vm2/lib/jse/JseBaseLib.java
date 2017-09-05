@@ -26,7 +26,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.BaseLib;
 import org.luaj.vm2.lib.LibFunction;
@@ -34,11 +34,11 @@ import org.luaj.vm2.lib.ResourceFinder;
 
 /** 
  * Subclass of {@link BaseLib} and {@link LibFunction} which implements the lua basic library functions
- * and provides a directory based {@link ResourceFinder} as the {@link Globals#finder}. 
+ * and provides a directory based {@link ResourceFinder} as the {@link LuaState#finder}.
  * <p>
  * Since JME has no file system by default, {@link BaseLib} implements 
  * {@link ResourceFinder} using {@link Class#getResource(String)}. 
- * The {@link org.luaj.vm2.lib.jse.JseBaseLib} implements {@link Globals#finder} by scanning the current directory
+ * The {@link org.luaj.vm2.lib.jse.JseBaseLib} implements {@link LuaState#finder} by scanning the current directory
  * first, then falling back to   {@link Class#getResource(String)} if that fails.
  * Otherwise, the behavior is the same as that of {@link BaseLib}.  
  * <p>  
@@ -51,7 +51,7 @@ import org.luaj.vm2.lib.ResourceFinder;
  * <p>
  * For special cases where the smallest possible footprint is desired, 
  * a minimal set of libraries could be loaded
- * directly via {@link Globals#load(LuaValue)} using code such as:
+ * directly via {@link LuaState#load(LuaValue)} using code such as:
  * <pre> {@code
  * Globals globals = new Globals();
  * globals.load(new JseBaseLib());
@@ -60,10 +60,10 @@ import org.luaj.vm2.lib.ResourceFinder;
  * <p>However, other libraries such as <em>PackageLib</em> are not loaded in this case.
  * <p>
  * This is a direct port of the corresponding library in C.
- * @see Globals
+ * @see LuaState
  * @see BaseLib
  * @see ResourceFinder
- * @see Globals#finder
+ * @see LuaState#finder
  * @see LibFunction
  * @see org.luaj.vm2.lib.jse.JsePlatform
  * @see org.luaj.vm2.lib.jme.JmePlatform
@@ -76,7 +76,7 @@ public class JseBaseLib extends org.luaj.vm2.lib.BaseLib {
 	/** Perform one-time initialization on the library by creating a table
 	 * containing the library functions, adding that table to the supplied environment,
 	 * adding the table to package.loaded, and returning table as the return value.
-	 * <P>Specifically, extend the library loading to set the default value for {@link Globals#STDIN}
+	 * <P>Specifically, extend the library loading to set the default value for {@link LuaState#STDIN}
 	 * @param modname the module name supplied if this is loaded via 'require'.
 	 * @param env the environment to load into, which must be a Globals instance.
 	 */

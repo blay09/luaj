@@ -29,7 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.Lua;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -64,7 +64,7 @@ public class lua {
 		System.exit(-1);		
 	}
 
-	private static Globals globals;
+	private static LuaState globals;
 	private static boolean print = false;
 	private static String encoding = null;
 	

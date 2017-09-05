@@ -67,7 +67,7 @@ import org.luaj.vm2.lib.ResourceFinder;
  * <li>find the resource using the platform's {@link ResourceFinder}
  * <li>compile lua to lua bytecode using {@link Compiler}
  * <li>load lua bytecode to a {@link Prototype} using {@link Undumper}
- * <li>construct {@link LuaClosure} from {@link Prototype} with {@link Globals} using {@link Loader}
+ * <li>construct {@link LuaClosure} from {@link Prototype} with {@link LuaState} using {@link Loader}
  * </ul>
  * <p>
  * There are alternate flows when the direct lua-to-Java bytecode compiling {@link org.luaj.vm2.luajc.LuaJC} is used.
@@ -112,7 +112,7 @@ import org.luaj.vm2.lib.ResourceFinder;
  * @see org.luaj.vm2.compiler.LuaC
  * @see org.luaj.vm2.luajc.LuaJC
  */
-public class Globals extends LuaTable {
+public class LuaState extends LuaTable {
 
 	/** The current default input stream. */
 	public InputStream STDIN  = null;
@@ -157,7 +157,7 @@ public class Globals extends LuaTable {
 	}
 	
 	/** Check that this object is a Globals object, and return it, otherwise throw an error. */
-	public Globals checkglobals() {
+	public LuaState checkglobals() {
 		return this;
 	}
 	

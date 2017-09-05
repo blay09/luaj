@@ -23,7 +23,7 @@ package org.luaj.vm2.lib;
 
 import java.io.InputStream;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaString;
 import org.luaj.vm2.LuaTable;
@@ -100,7 +100,7 @@ public class PackageLib extends TwoArgFunction {
 	private static final LuaString _SEARCHERS   = valueOf("searchers");
 	
 	/** The globals that were used to load this library. */
-	Globals globals;
+	LuaState globals;
 
 	/** The table for this package. */
 	LuaTable package_;
@@ -194,7 +194,7 @@ public class PackageLib extends TwoArgFunction {
 	 */	
 	public class require extends OneArgFunction {
 		public LuaValue call( LuaValue arg ) {
-			LuaString name = arg.checkstring();
+			LuaString name = arg.checkLuaString();
 			LuaValue loaded = package_.get(_LOADED);
 			LuaValue result = loaded.get(name);
 			if ( result.toboolean() ) {

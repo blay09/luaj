@@ -11,8 +11,7 @@ import java.net.URL;
 
 import junit.framework.TestCase;
 
-import org.luaj.vm2.Globals;
-import org.luaj.vm2.LoadState;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.Print;
 import org.luaj.vm2.Prototype;
 import org.luaj.vm2.lib.jse.JsePlatform;
@@ -21,7 +20,7 @@ abstract public class AbstractUnitTests extends TestCase {
 
     private final String dir;
     private final String jar;
-    private Globals globals;
+    private LuaState globals;
 
     public AbstractUnitTests(String zipdir, String zipfile, String dir) {
     	URL zip = null;

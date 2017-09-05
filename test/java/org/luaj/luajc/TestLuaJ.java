@@ -21,7 +21,7 @@
  ******************************************************************************/
 package org.luaj.luajc;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Print;
 import org.luaj.vm2.Prototype;
@@ -47,7 +47,7 @@ public class TestLuaJ {
 		System.out.println(script);
 		
 		// create an environment to run in
-		Globals globals = JsePlatform.standardGlobals();
+		LuaState globals = JsePlatform.standardGlobals();
 		
 		// compile into a chunk, or load as a class
 		LuaValue chunk = globals.load(script, "script");

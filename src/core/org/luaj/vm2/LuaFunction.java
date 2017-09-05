@@ -56,7 +56,7 @@ public class LuaFunction extends LuaValue {
 		return this;
 	}
 	
-	public LuaFunction optfunction(LuaFunction defval) {
+	public LuaFunction functionOrElse(LuaFunction defval) {
 		return this; 
 	}
 

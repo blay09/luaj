@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LoadState;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.compiler.LuaC;
@@ -45,14 +45,14 @@ import org.luaj.vm2.lib.jse.LuajavaLib;
  * Note that these lookups are done at runtime, so the paint method or any other
  * method can be changed based on application logic, if desired.
  * 
- * @see Globals
+ * @see LuaState
  * @see LuaValue
  * @see Applet
  */
 public class SampleApplet extends Applet implements ResourceFinder {
 	private static final long serialVersionUID = 1L;
 
-	Globals globals;
+	LuaState globals;
 	LuaValue pcall;
 	LuaValue graphics;
 	Graphics coerced;
@@ -71,7 +71,7 @@ public class SampleApplet extends Applet implements ResourceFinder {
 		System.out.println("Loading " + script);
 
 		// Construct globals specific to the applet platform.
-		globals = new Globals();
+		globals = new LuaState();
 		globals.load(new JseBaseLib());
 		globals.load(new PackageLib());
 		globals.load(new Bit32Lib());

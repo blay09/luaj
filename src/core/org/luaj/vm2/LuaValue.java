@@ -21,8 +21,6 @@
 ******************************************************************************/
 package org.luaj.vm2;
 
-import org.luaj.vm2.Varargs;
-
 /**
  * Base class for all concrete lua type values.  
  * <p>
@@ -291,7 +289,7 @@ public class LuaValue extends Varargs {
 	 * @see #isboolean()
 	 * @see #toboolean()
 	 * @see #checkboolean()
-	 * @see #optboolean(boolean)
+	 * @see #booleanOrElse(boolean)
 	 * @see #TBOOLEAN
 	 */
 	public boolean isboolean()           { return false; }
@@ -310,7 +308,7 @@ public class LuaValue extends Varargs {
 	 * @return true if this is a {@code function}, otherwise false
 	 * @see #isclosure()
 	 * @see #checkfunction()
-	 * @see #optfunction(LuaFunction)
+	 * @see #functionOrElse(LuaFunction)
 	 * @see #TFUNCTION
 	 */
 	public boolean isfunction()          { return false; }
@@ -325,7 +323,7 @@ public class LuaValue extends Varargs {
 	 * @see #isinttype()
 	 * @see #islong()
 	 * @see #tonumber()
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #optint(int)
 	 * @see #TNUMBER
 	 */
@@ -386,7 +384,7 @@ public class LuaValue extends Varargs {
 	 * meaning derives from {@link LuaString} or {@link LuaNumber}, 
 	 * otherwise false
 	 * @see #tostring()
-	 * @see #checkstring()
+	 * @see #checkLuaString()
 	 * @see #optstring(LuaString)
 	 * @see #TSTRING
 	 */
@@ -412,7 +410,7 @@ public class LuaValue extends Varargs {
 	 * @return true if this is a {@code userdata}, otherwise false
 	 * @see #isuserdata(Class)
 	 * @see #touserdata()
-	 * @see #checkuserdata()
+	 * @see #checkUserdata()
 	 * @see #optuserdata(Object)
 	 * @see #TUSERDATA
 	 */
@@ -425,7 +423,7 @@ public class LuaValue extends Varargs {
 	 * otherwise false
 	 * @see #isuserdata()
 	 * @see #touserdata(Class)
-	 * @see #checkuserdata(Class)
+	 * @see #checkUserdata(Class)
 	 * @see #optuserdata(Class, Object)
 	 * @see #TUSERDATA
 	 */
@@ -433,7 +431,7 @@ public class LuaValue extends Varargs {
 	
 	/** Convert to boolean false if {@link #NIL} or {@link #FALSE}, true if anything else
 	 * @return Value cast to byte if number or string convertible to number, otherwise 0
-	 * @see #optboolean(boolean)
+	 * @see #booleanOrElse(boolean)
 	 * @see #checkboolean() 
 	 * @see #isboolean()
 	 * @see #TBOOLEAN
@@ -527,7 +525,7 @@ public class LuaValue extends Varargs {
 	 * @return String for use by human readers based on type. 
 	 * @see #tostring()
 	 * @see #optjstring(String)
-	 * @see #checkjstring()
+	 * @see #checkString()
 	 * @see #isstring()
 	 * @see #TSTRING
 	 */
@@ -536,7 +534,7 @@ public class LuaValue extends Varargs {
 	/** Convert to userdata instance, or null.
 	 * @return userdata instance if userdata, or null if not {@link LuaUserdata}
 	 * @see #optuserdata(Object)
-	 * @see #checkuserdata()
+	 * @see #checkUserdata()
 	 * @see #isuserdata()
 	 * @see #TUSERDATA
 	 */
@@ -546,7 +544,7 @@ public class LuaValue extends Varargs {
 	 * @return userdata instance if is a userdata whose instance derives from {@code c}, 
 	 * or null if not {@link LuaUserdata}
 	 * @see #optuserdata(Class,Object)
-	 * @see #checkuserdata(Class)
+	 * @see #checkUserdata(Class)
 	 * @see #isuserdata(Class)
 	 * @see #TUSERDATA
 	 */
@@ -558,7 +556,7 @@ public class LuaValue extends Varargs {
 	 * @see #tostring()
 	 * @see #tojstring()
 	 * @see #optstring(LuaString)
-	 * @see #checkstring()
+	 * @see #checkLuaString()
 	 * @see #toString() 
 	 */
 	public String toString() { return tojstring(); }
@@ -598,7 +596,7 @@ public class LuaValue extends Varargs {
 	 * @see #tonumber()
 	 * @see #tojstring()
 	 * @see #optstring(LuaString)
-	 * @see #checkstring()
+	 * @see #checkLuaString()
 	 * @see #toString() 
 	 */ 
 	public LuaValue    tostring()     { return NIL; }
@@ -613,7 +611,7 @@ public class LuaValue extends Varargs {
 	 * @see #isboolean()
 	 * @see #TBOOLEAN
 	 */
-	public boolean     optboolean(boolean defval)          { argerror("boolean");   return false; }
+	public boolean booleanOrElse(boolean defval)          { argerror("boolean");   return false; }
 
 	/** Check that optional argument is a closure and return as {@link LuaClosure}
 	 * <p>
@@ -659,7 +657,7 @@ public class LuaValue extends Varargs {
 	 * @see #isfunction()
 	 * @see #TFUNCTION
 	 */
-	public LuaFunction optfunction(LuaFunction defval)     { argerror("function");  return null;  }
+	public LuaFunction functionOrElse(LuaFunction defval)     { argerror("function");  return null;  }
 
 	/** Check that optional argument is a number or string convertible to number and return as int
 	 * @param defval int to return if {@code this} is nil or none
@@ -670,7 +668,7 @@ public class LuaValue extends Varargs {
 	 * @see #optdouble(double)
 	 * @see #optlong(long)
 	 * @see #optinteger(LuaInteger)
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #toint()
 	 * @see #tonumber()
 	 * @see #isnumber()
@@ -686,7 +684,7 @@ public class LuaValue extends Varargs {
 	 * @throws LuaError if was not numeric or nil or none.
 	 * @see #optdouble(double)
 	 * @see #optint(int)
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #toint()
 	 * @see #tonumber()
 	 * @see #isnumber()
@@ -702,7 +700,7 @@ public class LuaValue extends Varargs {
 	 * @throws LuaError if was not numeric or nil or none.
 	 * @see #optdouble(double)
 	 * @see #optint(int)
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #toint()
 	 * @see #tonumber()
 	 * @see #isnumber()
@@ -719,7 +717,7 @@ public class LuaValue extends Varargs {
 	 * @see #optdouble(double)
 	 * @see #optlong(long)
 	 * @see #optint(int)
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #toint()
 	 * @see #tonumber()
 	 * @see #isnumber()
@@ -735,7 +733,7 @@ public class LuaValue extends Varargs {
 	 * @throws LuaError if was not a string or number or nil or none.
 	 * @see #tojstring()
 	 * @see #optstring(LuaString)
-	 * @see #checkjstring()
+	 * @see #checkString()
 	 * @see #toString() 
 	 * @see #TSTRING
 	 */
@@ -749,7 +747,7 @@ public class LuaValue extends Varargs {
 	 * @throws LuaError if was not a string or number or nil or none.
 	 * @see #tojstring()
 	 * @see #optjstring(String)
-	 * @see #checkstring()
+	 * @see #checkLuaString()
 	 * @see #toString() 
 	 * @see #TSTRING
 	 */
@@ -785,7 +783,7 @@ public class LuaValue extends Varargs {
 	 * {@code defval} if nil or none, 
 	 * throws {@link LuaError} if some other type
 	 * @throws LuaError if was not a userdata or nil or none.
-	 * @see #checkuserdata()
+	 * @see #checkUserdata()
 	 * @see #isuserdata()
 	 * @see #optuserdata(Class, Object)
 	 * @see #TUSERDATA
@@ -800,7 +798,7 @@ public class LuaValue extends Varargs {
 	 * {@code defval} if nil or none, 
 	 * throws {@link LuaError} if some other type
 	 * @throws LuaError if was not a userdata whose instance is assignable to {@code c} or nil or none.
-	 * @see #checkuserdata(Class)
+	 * @see #checkUserdata(Class)
 	 * @see #isuserdata(Class)
 	 * @see #optuserdata(Object)
 	 * @see #TUSERDATA
@@ -824,7 +822,7 @@ public class LuaValue extends Varargs {
 	 * or throw {@link LuaError} if not
 	 * @return boolean value for {@code this} if it is a {@link LuaBoolean} 
 	 * @throws LuaError if not a {@link LuaBoolean}
-	 * @see #optboolean(boolean)
+	 * @see #booleanOrElse(boolean)
 	 * @see #TBOOLEAN
 	 */
 	public boolean     checkboolean()          { argerror("boolean");   return false; }
@@ -849,7 +847,7 @@ public class LuaValue extends Varargs {
 	 * that can be converted to a number will be converted to double. 
 	 * @return value cast to a double if numeric
 	 * @throws LuaError if not a {@link LuaNumber} or is a {@link LuaString} that can't be converted to number
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #checkinteger()
 	 * @see #checklong()
 	 * @see #optdouble(double)
@@ -871,11 +869,11 @@ public class LuaValue extends Varargs {
 
 	/** Check that the value is a Globals instance, or throw {@link LuaError} if not 
 	 * <p>
-	 * {@link Globals} are a special {@link LuaTable} that establish the default global environment.  
-	 * @return {@code this} if if an instance fof {@link Globals}
-	 * @throws LuaError if not a {@link Globals} instance. 
+	 * {@link LuaState} are a special {@link LuaTable} that establish the default global environment.
+	 * @return {@code this} if if an instance fof {@link LuaState}
+	 * @throws LuaError if not a {@link LuaState} instance.
 	 */
-	public Globals checkglobals() { argerror("globals");  return null; }
+	public LuaState checkglobals() { argerror("globals");  return null; }
 
 	/** Check that the value is numeric, and convert and cast value to int, or throw {@link LuaError} if not numeric 
 	 * <p>
@@ -890,7 +888,7 @@ public class LuaValue extends Varargs {
 	 * @see #optint(int)
 	 * @see #TNUMBER
 	 */
-	public int         checkint()              { argerror("int");       return 0; }
+	public int checkInt()              { argerror("int");       return 0; }
 
 	/** Check that the value is numeric, and convert and cast value to int, or throw {@link LuaError} if not numeric 
 	 * <p>
@@ -899,7 +897,7 @@ public class LuaValue extends Varargs {
 	 * then cast to int, so may also lose precision.
 	 * @return value cast to a int and wrapped in {@link LuaInteger} if numeric
 	 * @throws LuaError if not a {@link LuaNumber} or is a {@link LuaString} that can't be converted to number
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #checklong()
 	 * @see #checkdouble()
 	 * @see #optinteger(LuaInteger)
@@ -914,7 +912,7 @@ public class LuaValue extends Varargs {
 	 * then cast to long, so may also lose precision.
 	 * @return value cast to a long if numeric
 	 * @throws LuaError if not a {@link LuaNumber} or is a {@link LuaString} that can't be converted to number
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #checkinteger()
 	 * @see #checkdouble()
 	 * @see #optlong(long)
@@ -927,7 +925,7 @@ public class LuaValue extends Varargs {
 	 * Values that are {@link LuaString} that can be converted to a number will be converted and returned. 
 	 * @return value as a {@link LuaNumber} if numeric
 	 * @throws LuaError if not a {@link LuaNumber} or is a {@link LuaString} that can't be converted to number
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #checkinteger()
 	 * @see #checkdouble()
 	 * @see #checklong()
@@ -942,7 +940,7 @@ public class LuaValue extends Varargs {
 	 * @param msg String message to supply if conversion fails
 	 * @return value as a {@link LuaNumber} if numeric
 	 * @throws LuaError if not a {@link LuaNumber} or is a {@link LuaString} that can't be converted to number
-	 * @see #checkint()
+	 * @see #checkInt()
 	 * @see #checkinteger()
 	 * @see #checkdouble()
 	 * @see #checklong()
@@ -957,13 +955,13 @@ public class LuaValue extends Varargs {
 	 * C lua distribution, however hash codes have no relationship, 
 	 * and there may be differences in number formatting.  
 	 * @return String representation of the value
-	 * @see #checkstring()
+	 * @see #checkLuaString()
 	 * @see #optjstring(String)
 	 * @see #tojstring()
 	 * @see #isstring
 	 * @see #TSTRING
 	 */
-	public String      checkjstring()          { argerror("string");    return null; }
+	public String checkString()          { argerror("string");    return null; }
 	
 	/** Check that this is a lua string, or throw {@link LuaError} if it is not.
 	 * <p>
@@ -973,13 +971,13 @@ public class LuaValue extends Varargs {
 	 * 
 	 * @return {@link LuaString} representation of the value if it is a {@link LuaString} or {@link LuaNumber}
 	 * @throws LuaError if {@code this} is not a {@link LuaTable}
-	 * @see #checkjstring()
+	 * @see #checkString()
 	 * @see #optstring(LuaString)
 	 * @see #tostring()
 	 * @see #isstring()
 	 * @see #TSTRING
 	 */
-	public LuaString   checkstring()           { argerror("string");    return null; }
+	public LuaString checkLuaString()           { argerror("string");    return null; }
 	
 	/** Check that this is a {@link LuaTable}, or throw {@link LuaError} if it is not
 	 * @return {@code this} if it is a {@link LuaTable}
@@ -1004,20 +1002,20 @@ public class LuaValue extends Varargs {
 	 * @throws LuaError if {@code this} is not a {@link LuaUserdata}
 	 * @see #isuserdata()
 	 * @see #optuserdata(Object)
-	 * @see #checkuserdata(Class)
+	 * @see #checkUserdata(Class)
 	 * @see #TUSERDATA
 	 */
-	public Object      checkuserdata()         { argerror("userdata");  return null; }
+	public Object checkUserdata()         { argerror("userdata");  return null; }
 	
 	/** Check that this is a {@link LuaUserdata}, or throw {@link LuaError} if it is not
 	 * @return {@code this} if it is a {@link LuaUserdata}
 	 * @throws LuaError if {@code this} is not a {@link LuaUserdata}
 	 * @see #isuserdata(Class)
 	 * @see #optuserdata(Class, Object)
-	 * @see #checkuserdata()
+	 * @see #checkUserdata()
 	 * @see #TUSERDATA
 	 */
-	public Object      checkuserdata(Class c)  { argerror("userdata");  return null; }
+	public <T> T checkUserdata(Class<T> c)  { argerror("userdata");  return null; }
 	
 	/** Check that this is not the value {@link #NIL}, or throw {@link LuaError} if it is
 	 * @return {@code this} if it is not {@link #NIL}

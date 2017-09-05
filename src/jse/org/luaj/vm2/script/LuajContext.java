@@ -31,7 +31,7 @@ import java.io.Writer;
 import javax.script.ScriptContext;
 import javax.script.SimpleScriptContext;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.lib.jse.JsePlatform;
 import org.luaj.vm2.luajc.LuaJC;
 
@@ -42,7 +42,7 @@ import org.luaj.vm2.luajc.LuaJC;
 public class LuajContext extends SimpleScriptContext implements ScriptContext {
 
 	/** Globals for this context instance. */
-	public final Globals globals;
+	public final LuaState globals;
 
 	/** The initial value of globals.STDIN */
 	private final InputStream stdin;

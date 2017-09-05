@@ -25,7 +25,7 @@ import java.io.ByteArrayInputStream;
 
 import junit.framework.TestCase;
 
-import org.luaj.vm2.Globals.BufferedStream;
+import org.luaj.vm2.LuaState.BufferedStream;
 
 
 public class BufferedStreamTest extends TestCase {

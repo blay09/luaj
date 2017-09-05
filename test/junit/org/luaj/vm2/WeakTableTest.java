@@ -77,7 +77,7 @@ abstract public class WeakTableTest extends TableTest {
 			// check that table can be used to get elements 
 			assertEquals(tableValue, t.get("table"));
 			assertEquals(stringValue, t.get("string"));
-			assertEquals(obj, t.get("userdata").checkuserdata());
+			assertEquals(obj, t.get("userdata").checkUserdata());
 			assertEquals(tableValue2, t.get(1));
 
 			// nothing should be collected, since we have strong references here
@@ -86,7 +86,7 @@ abstract public class WeakTableTest extends TableTest {
 			// check that elements are still there 
 			assertEquals(tableValue, t.get("table"));
 			assertEquals(stringValue, t.get("string"));
-			assertEquals(obj, t.get("userdata").checkuserdata());
+			assertEquals(obj, t.get("userdata").checkUserdata());
 			assertEquals(tableValue2, t.get(1));
 
 			// drop our strong references

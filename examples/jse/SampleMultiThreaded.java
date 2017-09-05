@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.lib.jse.JsePlatform;
 
 /** Simple toy program illustrating how to run Luaj in multiple threads. 
@@ -27,7 +27,7 @@ public class SampleMultiThreaded {
 		public void run() {
 			try {
 				// Each thread must have its own Globals.
-				Globals g = JsePlatform.standardGlobals();
+				LuaState g = JsePlatform.standardGlobals();
 
 				// Once a Globals is created, it can and should be reused 
 				// within the same thread.

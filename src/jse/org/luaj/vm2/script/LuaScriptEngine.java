@@ -82,7 +82,7 @@ public class LuaScriptEngine extends AbstractScriptEngine implements ScriptEngin
 		try {
 	    	InputStream is = new Utf8Encoder(script);
 	    	try {
-	    		final Globals g = context.globals;
+	    		final LuaState g = context.globals;
 	    		final LuaFunction f = g.load(script, "script").checkfunction();
 	    		return new LuajCompiledScript(f, g);
 			} catch ( LuaError lee ) {
@@ -135,8 +135,8 @@ public class LuaScriptEngine extends AbstractScriptEngine implements ScriptEngin
 
 	class LuajCompiledScript extends CompiledScript {
 		final LuaFunction function;
-		final Globals compiling_globals;
-		LuajCompiledScript(LuaFunction function, Globals compiling_globals) {
+		final LuaState compiling_globals;
+		LuajCompiledScript(LuaFunction function, LuaState compiling_globals) {
 			this.function = function;
 			this.compiling_globals = compiling_globals;
 		}
@@ -157,7 +157,7 @@ public class LuaScriptEngine extends AbstractScriptEngine implements ScriptEngin
 	    	return eval(((LuajContext) context).globals, context.getBindings(ScriptContext.ENGINE_SCOPE));
 		}
 	    
-	    Object eval(Globals g, Bindings b) throws ScriptException {
+	    Object eval(LuaState g, Bindings b) throws ScriptException {
 	    	g.setmetatable(new BindingsMetatable(b));
 			LuaFunction f = function;
 			if (f.isclosure())
@@ -242,7 +242,7 @@ public class LuaScriptEngine extends AbstractScriptEngine implements ScriptEngin
 		switch ( luajValue.type() ) {
 		case LuaValue.TNIL: return null;
 		case LuaValue.TSTRING: return luajValue.tojstring();
-		case LuaValue.TUSERDATA: return luajValue.checkuserdata(Object.class);
+		case LuaValue.TUSERDATA: return luajValue.checkUserdata(Object.class);
 		case LuaValue.TNUMBER: return luajValue.isinttype()? 
 				(Object) new Integer(luajValue.toint()): 
 				(Object) new Double(luajValue.todouble());

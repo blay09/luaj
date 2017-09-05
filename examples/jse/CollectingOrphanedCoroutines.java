@@ -1,4 +1,4 @@
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaThread;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
@@ -39,7 +39,7 @@ public class CollectingOrphanedCoroutines {
 		LuaThread.thread_orphan_check_interval = 500;
 
 		// Should work with standard or debug globals.
-		Globals globals = JsePlatform.standardGlobals();
+		LuaState globals = JsePlatform.standardGlobals();
 		// Globals globals = JsePlatform.debugGlobals();
 		
 		// Should work with plain compiler or lua-to-Java compiler.

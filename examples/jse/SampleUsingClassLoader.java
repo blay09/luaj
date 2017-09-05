@@ -1,7 +1,7 @@
 import java.io.InputStream;
 import java.io.Reader;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
 import org.luaj.vm2.server.Launcher;
@@ -65,7 +65,7 @@ public class SampleUsingClassLoader {
 	 * classes loaded by other instances.
 	 */
 	public static class MyLauncher implements Launcher {
-		Globals g;
+		LuaState g;
 		public MyLauncher() {
 			g = JsePlatform.debugGlobals();
 			// ... plus any other customization of the user environment

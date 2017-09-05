@@ -22,16 +22,16 @@
 package org.luaj.vm2;
 
 
-public class LuaUserdata extends LuaValue {
+public class LuaUserdata<T> extends LuaValue {
 	
-	public Object m_instance;
+	public T m_instance;
 	public LuaValue m_metatable;
 	
-	public LuaUserdata(Object obj) {
+	public LuaUserdata(T obj) {
 		m_instance = obj;
 	}
 	
-	public LuaUserdata(Object obj, LuaValue metatable) {
+	public LuaUserdata(T obj, LuaValue metatable) {
 		m_instance = obj;
 		m_metatable = metatable;
 	}
@@ -76,11 +76,11 @@ public class LuaUserdata extends LuaValue {
 		return this;
 	}
 
-	public Object checkuserdata() {
+	public Object checkUserdata() {
 		return m_instance;
 	}
 	
-	public Object checkuserdata(Class c) { 
+	public Object checkUserdata(Class c) {
 		if ( c.isAssignableFrom(m_instance.getClass()) )
 			return m_instance;		
 		return typerror(c.getName());

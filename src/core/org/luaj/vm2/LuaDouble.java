@@ -268,15 +268,15 @@ public class LuaDouble extends LuaNumber {
 	public LuaValue tonumber() {
 		return this;
 	}
-	public int checkint()                { return (int) (long) v; }
+	public int checkInt()                { return (int) (long) v; }
 	public long checklong()              { return (long) v; }
 	public LuaNumber checknumber()       { return this; }
 	public double checkdouble()          { return v; }
 	
-	public String checkjstring() { 
+	public String checkString() {
 		return tojstring();
 	}
-	public LuaString checkstring() { 
+	public LuaString checkLuaString() {
 		return LuaString.valueOf(tojstring());
 	}
 	

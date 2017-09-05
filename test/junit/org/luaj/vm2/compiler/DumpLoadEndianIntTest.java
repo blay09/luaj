@@ -11,8 +11,7 @@ import java.io.StringReader;
 
 import junit.framework.TestCase;
 
-import org.luaj.vm2.Globals;
-import org.luaj.vm2.LoadState;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaClosure;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
@@ -30,7 +29,7 @@ public class DumpLoadEndianIntTest extends TestCase {
 	private static final String withdoubles = "1234-#!-23.75";
 	private static final String withints = "1234-#!-23";
 
-    private Globals globals;
+    private LuaState globals;
 
     protected void setUp() throws Exception {
         super.setUp();

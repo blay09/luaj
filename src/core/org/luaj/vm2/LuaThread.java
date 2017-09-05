@@ -33,12 +33,12 @@ import java.lang.ref.WeakReference;
  * <p>
  * The threads must be initialized with the globals, so that 
  * the global environment may be passed along according to rules of lua. 
- * This is done via the constructor arguments {@link #LuaThread(Globals)} or 
- * {@link #LuaThread(Globals, LuaValue)}.
+ * This is done via the constructor arguments {@link #LuaThread(LuaState)} or
+ * {@link #LuaThread(LuaState, LuaValue)}.
  * <p> 
  * The utility classes {@link org.luaj.vm2.lib.jse.JsePlatform} and 
  * {@link org.luaj.vm2.lib.jme.JmePlatform} 
- * see to it that this {@link Globals} are initialized properly.
+ * see to it that this {@link LuaState} are initialized properly.
  * <p>
  * The behavior of coroutine threads matches closely the behavior 
  * of C coroutine library.  However, because of the use of Java threads 
@@ -52,7 +52,7 @@ import java.lang.ref.WeakReference;
  * is {@link #thread_orphan_check_interval} and may be set by the user.
  * <p> 
  * There are two main ways to abandon a coroutine.  The first is to call 
- * {@code yield()} from lua, or equivalently {@link Globals#yield(Varargs)}, 
+ * {@code yield()} from lua, or equivalently {@link LuaState#yield(Varargs)},
  * and arrange to have it never resumed possibly by values passed to yield.
  * The second is to throw {@link OrphanedThread}, which should put the thread
  * in a dead state.   In either case all references to the thread must be
@@ -102,13 +102,13 @@ public class LuaThread extends LuaValue {
 	 * This is an opaque value that should not be modified by applications. */
 	public Object callstack;
 
-	public final Globals globals;
+	public final LuaState globals;
 
 	/** Error message handler for this thread, if any.  */
 	public LuaValue errorfunc;
 	
 	/** Private constructor for main thread only */
-	public LuaThread(Globals globals) {
+	public LuaThread(LuaState globals) {
 		state = new State(globals, this, null);
 		state.status = STATUS_RUNNING;
 		this.globals = globals;
@@ -118,7 +118,7 @@ public class LuaThread extends LuaValue {
 	 * Create a LuaThread around a function and environment
 	 * @param func The function to execute
 	 */
-	public LuaThread(Globals globals, LuaValue func) {	
+	public LuaThread(LuaState globals, LuaValue func) {
 		LuaValue.assert_(func != null, "function cannot be null");
 		state = new State(globals, this, func);
 		this.globals = globals;
@@ -165,7 +165,7 @@ public class LuaThread extends LuaValue {
 	}
 
 	public static class State implements Runnable {
-		private final Globals globals;
+		private final LuaState globals;
 		final WeakReference lua_thread;
 		public final LuaValue function;
 		Varargs args = LuaValue.NONE;
@@ -185,7 +185,7 @@ public class LuaThread extends LuaValue {
 		
 		public int status = LuaThread.STATUS_INITIAL;
 
-		State(Globals globals, LuaThread lua_thread, LuaValue function) {
+		State(LuaState globals, LuaThread lua_thread, LuaValue function) {
 			this.globals = globals;
 			this.lua_thread = new WeakReference(lua_thread);
 			this.function = function;

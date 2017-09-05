@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.util.Hashtable;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaClosure;
 import org.luaj.vm2.LuaFunction;
 import org.luaj.vm2.LuaValue;
@@ -34,7 +34,7 @@ import org.luaj.vm2.Prototype;
 import org.luaj.vm2.compiler.LuaC;
 
 /**
- * Implementation of {@link org.luaj.vm2.Globals.Compiler} which does direct 
+ * Implementation of {@link LuaState.Compiler} which does direct
  * lua-to-java-bytecode compiling. 
  * <p>
  * By default, when using {@link org.luaj.vm2.lib.jse.JsePlatform} or 
@@ -57,12 +57,12 @@ import org.luaj.vm2.compiler.LuaC;
  * If the library is not found, the default {@link LuaC} lua-to-lua-bytecode 
  * compiler will be used.  
  * 
- * @see Globals#compiler
- * @see #install(Globals)
+ * @see LuaState#compiler
+ * @see #install(LuaState)
  * @see org.luaj.vm2.compiler.LuaC
  * @see LuaValue
  */
-public class LuaJC implements Globals.Loader {
+public class LuaJC implements LuaState.Loader {
 	
 	public static final LuaJC instance = new LuaJC();
 	
@@ -70,19 +70,19 @@ public class LuaJC implements Globals.Loader {
 	 * Install the compiler as the main Globals.Loader to use in a set of globals. 
 	 * Will fall back to the LuaC prototype compiler.
 	 */
-	public static final void install(Globals G) {
+	public static final void install(LuaState G) {
 		G.loader = instance; 
 	}
 	
 	protected LuaJC() {}
 
-	public Hashtable compileAll(InputStream script, String chunkname, String filename, Globals globals, boolean genmain) throws IOException {
+	public Hashtable compileAll(InputStream script, String chunkname, String filename, LuaState globals, boolean genmain) throws IOException {
 		final String classname = toStandardJavaClassName( chunkname );
 		final Prototype p = globals.loadPrototype(script, classname, "bt");
 		return compileProtoAndSubProtos(p, classname, filename, genmain);
 	}
 	
-	public Hashtable compileAll(Reader script, String chunkname, String filename, Globals globals, boolean genmain) throws IOException {
+	public Hashtable compileAll(Reader script, String chunkname, String filename, LuaState globals, boolean genmain) throws IOException {
 		final String classname = toStandardJavaClassName( chunkname );
 		final Prototype p = globals.compilePrototype(script, classname);
 		return compileProtoAndSubProtos(p, classname, filename, genmain);

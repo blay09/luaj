@@ -2,12 +2,12 @@ package org.luaj.vm2.lib.jse;
 
 import junit.framework.TestCase;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaValue;
 
 public class LuajavaAccessibleMembersTest extends TestCase {
 		
-	private Globals globals;
+	private LuaState globals;
 
     protected void setUp() throws Exception {
         super.setUp();

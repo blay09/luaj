@@ -25,7 +25,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LoadState;
 import org.luaj.vm2.LocVars;
 import org.luaj.vm2.Prototype;
@@ -55,7 +55,7 @@ import org.luaj.vm2.LuaValue;
  * } </pre>
  * 
  * 
- * More commonly, the {@link Globals#undumper} may be used to undump them:
+ * More commonly, the {@link LuaState#undumper} may be used to undump them:
  * <pre> {@code
  * Prototype p = globals.loadPrototype(new ByteArrayInputStream(lua_binary_file_bytes), "main.lua", "b");
  * LuaClosure c = new LuaClosure(p, globals);
@@ -64,7 +64,7 @@ import org.luaj.vm2.LuaValue;
  * 
  * @see luac
  * @see LoadState
- * @see Globals
+ * @see LuaState
  * @see Prototype
  */
 public class DumpState {

@@ -170,7 +170,7 @@ public abstract class Varargs {
 	 * @return true if argument i is boolean true, false if it is false, or defval if not supplied or nil 
 	 * @exception LuaError if the argument is not a lua boolean
 	 * */
-	public boolean      optboolean(int i, boolean defval)          { return arg(i).optboolean(defval); }
+	public boolean      optboolean(int i, boolean defval)          { return arg(i).booleanOrElse(defval); }
 
 	/** Return argument i as a closure, {@code defval} if nil, or throw a LuaError if any other type.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -191,7 +191,7 @@ public abstract class Varargs {
 	 * @return LuaValue that can be called if argument i is lua function or closure, or defval if not supplied or nil
 	 * @exception LuaError if the argument is not a lua function or closure
 	 * */
-	public LuaFunction  optfunction(int i, LuaFunction defval)     { return arg(i).optfunction(defval); }
+	public LuaFunction  optfunction(int i, LuaFunction defval)     { return arg(i).functionOrElse(defval); }
 
 	/** Return argument i as a java int value, discarding any fractional part, {@code defval} if nil, or throw a LuaError  if not a number.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -333,14 +333,14 @@ public abstract class Varargs {
 	 * @return String value if argument i is a string or number
 	 * @exception LuaError if the argument is not a string or number
 	 * */
-	public String       checkjstring(int i)          { return arg(i).checkjstring(); }
+	public String       checkjstring(int i)          { return arg(i).checkString(); }
 
 	/** Return argument i as a LuaString if a string or number, or throw an error if any other type
 	 * @param i the index of the argument to test, 1 is the first argument
 	 * @return LuaString value if argument i is a string or number
 	 * @exception LuaError if the argument is not a string or number
 	 * */
-	public LuaString    checkstring(int i)           { return arg(i).checkstring(); }
+	public LuaString    checkstring(int i)           { return arg(i).checkLuaString(); }
 
 	/** Return argument i as a LuaTable if a lua table, or throw an error if any other type.
 	 * @param i the index of the argument to test, 1 is the first argument
@@ -361,7 +361,7 @@ public abstract class Varargs {
 	 * @return java Object value if argument i is a userdata
 	 * @exception LuaError if the argument is not a userdata
 	 * */
-	public Object       checkuserdata(int i)         { return arg(i).checkuserdata(); }
+	public Object       checkuserdata(int i)         { return arg(i).checkUserdata(); }
 
 	/** Return argument i as a java Object if it is a userdata whose instance Class c or a subclass, 
 	 * or throw an error if any other type.
@@ -370,7 +370,7 @@ public abstract class Varargs {
 	 * @return java Object value if argument i is a userdata whose instance Class c or a subclass
 	 * @exception LuaError if the argument is not a userdata or from whose instance c is not assignable
 	 * */
-	public Object       checkuserdata(int i,Class c) { return arg(i).checkuserdata(c); }
+	public Object       checkuserdata(int i,Class c) { return arg(i).checkUserdata(c); }
 
 	/** Return argument i as a LuaValue if it exists, or throw an error.
 	 * @param i the index of the argument to test, 1 is the first argument

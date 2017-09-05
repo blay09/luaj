@@ -31,7 +31,7 @@ import org.luaj.vm2.lib.jse.JsePlatform;
 
 public class OrphanedThreadTest extends TestCase {
 
-	Globals globals;
+	LuaState globals;
 	LuaThread luathread;
 	WeakReference luathr_ref;
 	LuaValue function;
@@ -135,8 +135,8 @@ public class OrphanedThreadTest extends TestCase {
 	
 	
 	static class NormalFunction extends OneArgFunction {
-		final Globals globals;
-		public NormalFunction(Globals globals) {
+		final LuaState globals;
+		public NormalFunction(LuaState globals) {
 			this.globals = globals;
 		}
 		public LuaValue call(LuaValue arg) {
@@ -150,8 +150,8 @@ public class OrphanedThreadTest extends TestCase {
 	}
 	
 	static class EarlyCompletionFunction extends OneArgFunction {
-		final Globals globals;
-		public EarlyCompletionFunction(Globals globals) {
+		final LuaState globals;
+		public EarlyCompletionFunction(LuaState globals) {
 			this.globals = globals;
 		}
 		public LuaValue call(LuaValue arg) {
@@ -163,8 +163,8 @@ public class OrphanedThreadTest extends TestCase {
 	}
 	
 	static class AbnormalFunction extends OneArgFunction {
-		final Globals globals;
-		public AbnormalFunction(Globals globals) {
+		final LuaState globals;
+		public AbnormalFunction(LuaState globals) {
 			this.globals = globals;
 		}
 		public LuaValue call(LuaValue arg) {

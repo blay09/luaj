@@ -56,7 +56,7 @@ public class TypeTest extends TestCase {
 	private final LuaValue stringdouble  = LuaValue.valueOf(samplestringdouble);
 	private final LuaTable    table         = LuaValue.tableOf();
 	private final LuaFunction somefunc      = new ZeroArgFunction() { public LuaValue call() { return NONE;}};
-	private final LuaThread   thread        = new LuaThread(new Globals(), somefunc);
+	private final LuaThread   thread        = new LuaThread(new LuaState(), somefunc);
 	private final LuaClosure  someclosure   = new LuaClosure(new Prototype(), new LuaTable());
 	private final LuaUserdata userdataobj   = LuaValue.userdataOf(sampleobject);
 	private final LuaUserdata userdatacls   = LuaValue.userdataOf(sampledata);
@@ -557,24 +557,24 @@ public class TypeTest extends TestCase {
 	}
 
 	public void testOptBoolean() {
-		assertEquals( true, somenil.optboolean(true) );
-		assertEquals( false, somenil.optboolean(false) );
-		assertEquals( true, sometrue.optboolean(false) );
-		assertEquals( false, somefalse.optboolean(true) );
-		throwsError( zero, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( intint, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( longdouble, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( doubledouble, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( somefunc, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( someclosure, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( stringstring, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( stringint, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( stringlong, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( stringdouble, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( thread, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( table, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( userdataobj, "optboolean", boolean.class, Boolean.FALSE );
-		throwsError( userdatacls, "optboolean", boolean.class, Boolean.FALSE );
+		assertEquals( true, somenil.booleanOrElse(true) );
+		assertEquals( false, somenil.booleanOrElse(false) );
+		assertEquals( true, sometrue.booleanOrElse(false) );
+		assertEquals( false, somefalse.booleanOrElse(true) );
+		throwsError( zero, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( intint, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( longdouble, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( doubledouble, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( somefunc, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( someclosure, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( stringstring, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( stringint, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( stringlong, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( stringdouble, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( thread, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( table, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( userdataobj, "booleanOrElse", boolean.class, Boolean.FALSE );
+		throwsError( userdatacls, "booleanOrElse", boolean.class, Boolean.FALSE );
 	}
 
 	public void testOptClosure() {
@@ -620,26 +620,26 @@ public class TypeTest extends TestCase {
 	}
 
 	public void testOptFunction() {
-		assertEquals( somefunc, somenil.optfunction(somefunc) );
-		assertEquals( null, somenil.optfunction(null) );
-		throwsError( sometrue, "optfunction", LuaFunction.class, somefunc );
-		throwsError( somefalse, "optfunction", LuaFunction.class, somefunc );
-		throwsError( zero, "optfunction", LuaFunction.class, somefunc );
-		throwsError( intint, "optfunction", LuaFunction.class, somefunc );
-		throwsError( longdouble, "optfunction", LuaFunction.class, somefunc );
-		throwsError( doubledouble, "optfunction", LuaFunction.class, somefunc );
-		assertEquals( somefunc, somefunc.optfunction(null) );
-		assertEquals( someclosure, someclosure.optfunction(null) );
-		assertEquals( somefunc, somefunc.optfunction(somefunc) );
-		assertEquals( someclosure, someclosure.optfunction(somefunc) );
-		throwsError( stringstring, "optfunction", LuaFunction.class, somefunc );
-		throwsError( stringint, "optfunction", LuaFunction.class, somefunc );
-		throwsError( stringlong, "optfunction", LuaFunction.class, somefunc );
-		throwsError( stringdouble, "optfunction", LuaFunction.class, somefunc );
-		throwsError( thread, "optfunction", LuaFunction.class, somefunc );
-		throwsError( table, "optfunction", LuaFunction.class, somefunc );
-		throwsError( userdataobj, "optfunction", LuaFunction.class, somefunc );
-		throwsError( userdatacls, "optfunction", LuaFunction.class, somefunc );
+		assertEquals( somefunc, somenil.functionOrElse(somefunc) );
+		assertEquals( null, somenil.functionOrElse(null) );
+		throwsError( sometrue, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( somefalse, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( zero, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( intint, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( longdouble, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( doubledouble, "functionOrElse", LuaFunction.class, somefunc );
+		assertEquals( somefunc, somefunc.functionOrElse(null) );
+		assertEquals( someclosure, someclosure.functionOrElse(null) );
+		assertEquals( somefunc, somefunc.functionOrElse(somefunc) );
+		assertEquals( someclosure, someclosure.functionOrElse(somefunc) );
+		throwsError( stringstring, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( stringint, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( stringlong, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( stringdouble, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( thread, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( table, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( userdataobj, "functionOrElse", LuaFunction.class, somefunc );
+		throwsError( userdatacls, "functionOrElse", LuaFunction.class, somefunc );
 	}
 
 	public void testOptInt() {
@@ -998,23 +998,23 @@ public class TypeTest extends TestCase {
 	}
 
 	public void testCheckInt() {
-		throwsErrorReq( somenil, "checkint" );
-		throwsErrorReq( sometrue, "checkint" );
-		throwsErrorReq( somefalse, "checkint" );
-		assertEquals( 0, zero.checkint() );
-		assertEquals( sampleint, intint.checkint() );
-		assertEquals( (int) samplelong, longdouble.checkint() );
-		assertEquals( (int) sampledouble, doubledouble.checkint() );
-		throwsErrorReq( somefunc, "checkint" );
-		throwsErrorReq( someclosure, "checkint" );
-		throwsErrorReq( stringstring, "checkint" );
-		assertEquals( sampleint, stringint.checkint() );
-		assertEquals( (int) samplelong, stringlong.checkint() );
-		assertEquals( (int) sampledouble, stringdouble.checkint() );
-		throwsErrorReq( thread, "checkint" );
-		throwsErrorReq( table, "checkint" );
-		throwsErrorReq( userdataobj, "checkint" );
-		throwsErrorReq( userdatacls, "checkint" );
+		throwsErrorReq( somenil, "checkInt" );
+		throwsErrorReq( sometrue, "checkInt" );
+		throwsErrorReq( somefalse, "checkInt" );
+		assertEquals( 0, zero.checkInt() );
+		assertEquals( sampleint, intint.checkInt() );
+		assertEquals( (int) samplelong, longdouble.checkInt() );
+		assertEquals( (int) sampledouble, doubledouble.checkInt() );
+		throwsErrorReq( somefunc, "checkInt" );
+		throwsErrorReq( someclosure, "checkInt" );
+		throwsErrorReq( stringstring, "checkInt" );
+		assertEquals( sampleint, stringint.checkInt() );
+		assertEquals( (int) samplelong, stringlong.checkInt() );
+		assertEquals( (int) sampledouble, stringdouble.checkInt() );
+		throwsErrorReq( thread, "checkInt" );
+		throwsErrorReq( table, "checkInt" );
+		throwsErrorReq( userdataobj, "checkInt" );
+		throwsErrorReq( userdatacls, "checkInt" );
 	}
 	
 	public void testCheckInteger() {
@@ -1120,69 +1120,69 @@ public class TypeTest extends TestCase {
 	}
 	
 	public void testCheckJavaString() {
-		throwsErrorReq( somenil, "checkjstring" );
-		throwsErrorReq( sometrue, "checkjstring" );
-		throwsErrorReq( somefalse, "checkjstring" );
-		assertEquals( String.valueOf(zero), zero.checkjstring() );
-		assertEquals( String.valueOf(intint), intint.checkjstring() );
-		assertEquals( String.valueOf(longdouble), longdouble.checkjstring() );
-		assertEquals( String.valueOf(doubledouble), doubledouble.checkjstring() );
-		throwsErrorReq( somefunc, "checkjstring" );
-		throwsErrorReq( someclosure, "checkjstring" );
-		assertEquals( samplestringstring, stringstring.checkjstring() );
-		assertEquals( samplestringint, stringint.checkjstring() );
-		assertEquals( samplestringlong, stringlong.checkjstring() );
-		assertEquals( samplestringdouble, stringdouble.checkjstring() );
-		throwsErrorReq( thread, "checkjstring" );
-		throwsErrorReq( table, "checkjstring" );
-		throwsErrorReq( userdataobj, "checkjstring" );
-		throwsErrorReq( userdatacls, "checkjstring" );
+		throwsErrorReq( somenil, "checkString" );
+		throwsErrorReq( sometrue, "checkString" );
+		throwsErrorReq( somefalse, "checkString" );
+		assertEquals( String.valueOf(zero), zero.checkString() );
+		assertEquals( String.valueOf(intint), intint.checkString() );
+		assertEquals( String.valueOf(longdouble), longdouble.checkString() );
+		assertEquals( String.valueOf(doubledouble), doubledouble.checkString() );
+		throwsErrorReq( somefunc, "checkString" );
+		throwsErrorReq( someclosure, "checkString" );
+		assertEquals( samplestringstring, stringstring.checkString() );
+		assertEquals( samplestringint, stringint.checkString() );
+		assertEquals( samplestringlong, stringlong.checkString() );
+		assertEquals( samplestringdouble, stringdouble.checkString() );
+		throwsErrorReq( thread, "checkString" );
+		throwsErrorReq( table, "checkString" );
+		throwsErrorReq( userdataobj, "checkString" );
+		throwsErrorReq( userdatacls, "checkString" );
 	}
 	
 	public void testCheckLuaString() {
-		throwsErrorReq( somenil, "checkstring" );
-		throwsErrorReq( sometrue, "checkstring" );
-		throwsErrorReq( somefalse, "checkstring" );
-		assertEquals( LuaValue.valueOf("0"), zero.checkstring() );
-		assertEquals( stringint, intint.checkstring() );
-		assertEquals( stringlong, longdouble.checkstring() );
-		assertEquals( stringdouble, doubledouble.checkstring() );
-		throwsErrorReq( somefunc, "checkstring" );
-		throwsErrorReq( someclosure, "checkstring" );
-		assertEquals( stringstring, stringstring.checkstring() );
-		assertEquals( stringint, stringint.checkstring() );
-		assertEquals( stringlong, stringlong.checkstring() );
-		assertEquals( stringdouble, stringdouble.checkstring() );
-		throwsErrorReq( thread, "checkstring" );
-		throwsErrorReq( table, "checkstring" );
-		throwsErrorReq( userdataobj, "checkstring" );
-		throwsErrorReq( userdatacls, "checkstring" );
+		throwsErrorReq( somenil, "checkLuaString" );
+		throwsErrorReq( sometrue, "checkLuaString" );
+		throwsErrorReq( somefalse, "checkLuaString" );
+		assertEquals( LuaValue.valueOf("0"), zero.checkLuaString() );
+		assertEquals( stringint, intint.checkLuaString() );
+		assertEquals( stringlong, longdouble.checkLuaString() );
+		assertEquals( stringdouble, doubledouble.checkLuaString() );
+		throwsErrorReq( somefunc, "checkLuaString" );
+		throwsErrorReq( someclosure, "checkLuaString" );
+		assertEquals( stringstring, stringstring.checkLuaString() );
+		assertEquals( stringint, stringint.checkLuaString() );
+		assertEquals( stringlong, stringlong.checkLuaString() );
+		assertEquals( stringdouble, stringdouble.checkLuaString() );
+		throwsErrorReq( thread, "checkLuaString" );
+		throwsErrorReq( table, "checkLuaString" );
+		throwsErrorReq( userdataobj, "checkLuaString" );
+		throwsErrorReq( userdatacls, "checkLuaString" );
 	}
 	
 	public void testCheckUserdata() {
-		throwsErrorReq( somenil, "checkuserdata" );
-		throwsErrorReq( sometrue, "checkuserdata" );
-		throwsErrorReq( somefalse, "checkuserdata" );
-		throwsErrorReq( zero, "checkuserdata" );
-		throwsErrorReq( intint, "checkuserdata" );
-		throwsErrorReq( longdouble, "checkuserdata" );
-		throwsErrorReq( doubledouble, "checkuserdata" );
-		throwsErrorReq( somefunc, "checkuserdata" );
-		throwsErrorReq( someclosure, "checkuserdata" );
-		throwsErrorReq( stringstring, "checkuserdata" );
-		throwsErrorReq( stringint, "checkuserdata" );
-		throwsErrorReq( stringlong, "checkuserdata" );
-		throwsErrorReq( stringdouble, "checkuserdata" );
-		throwsErrorReq( table, "checkuserdata" );
-		assertEquals( sampleobject, userdataobj.checkuserdata() );
-		assertEquals( sampleobject, userdataobj.checkuserdata() );
-		assertEquals( sampledata, userdatacls.checkuserdata() );
-		assertEquals( sampledata, userdatacls.checkuserdata() );
+		throwsErrorReq( somenil, "checkUserdata" );
+		throwsErrorReq( sometrue, "checkUserdata" );
+		throwsErrorReq( somefalse, "checkUserdata" );
+		throwsErrorReq( zero, "checkUserdata" );
+		throwsErrorReq( intint, "checkUserdata" );
+		throwsErrorReq( longdouble, "checkUserdata" );
+		throwsErrorReq( doubledouble, "checkUserdata" );
+		throwsErrorReq( somefunc, "checkUserdata" );
+		throwsErrorReq( someclosure, "checkUserdata" );
+		throwsErrorReq( stringstring, "checkUserdata" );
+		throwsErrorReq( stringint, "checkUserdata" );
+		throwsErrorReq( stringlong, "checkUserdata" );
+		throwsErrorReq( stringdouble, "checkUserdata" );
+		throwsErrorReq( table, "checkUserdata" );
+		assertEquals( sampleobject, userdataobj.checkUserdata() );
+		assertEquals( sampleobject, userdataobj.checkUserdata() );
+		assertEquals( sampledata, userdatacls.checkUserdata() );
+		assertEquals( sampledata, userdatacls.checkUserdata() );
 	}
 
 	private void throwsErrorReqCheckUserdataClass(LuaValue obj, Class arg ) {
 		try {
-			obj.getClass().getMethod("checkuserdata", Class.class ).invoke(obj, arg);
+			obj.getClass().getMethod("checkUserdata", Class.class ).invoke(obj, arg);
 		} catch (InvocationTargetException e) {
 			if ( ! (e.getTargetException() instanceof LuaError) )
 				fail("not a LuaError: "+e.getTargetException());
@@ -1209,14 +1209,14 @@ public class TypeTest extends TestCase {
 		throwsErrorReqCheckUserdataClass( stringdouble,  MyData.class);
 		throwsErrorReqCheckUserdataClass( table,  MyData.class);
 		throwsErrorReqCheckUserdataClass( thread,  MyData.class);
-		assertEquals( sampleobject, userdataobj.checkuserdata(Object.class) );
-		assertEquals( sampleobject, userdataobj.checkuserdata() );
-		assertEquals( sampledata, userdatacls.checkuserdata(MyData.class) );
-		assertEquals( sampledata, userdatacls.checkuserdata(Object.class) );
-		assertEquals( sampledata, userdatacls.checkuserdata() );
+		assertEquals( sampleobject, userdataobj.checkUserdata(Object.class) );
+		assertEquals( sampleobject, userdataobj.checkUserdata() );
+		assertEquals( sampledata, userdatacls.checkUserdata(MyData.class) );
+		assertEquals( sampledata, userdatacls.checkUserdata(Object.class) );
+		assertEquals( sampledata, userdatacls.checkUserdata() );
 		// should fail due to wrong class
 		try {
-			Object o = userdataobj.checkuserdata(MyData.class);
+			Object o = userdataobj.checkUserdata(MyData.class);
 			fail( "did not throw bad type error" );
 			assertTrue( o instanceof MyData );
 		} catch ( LuaError le ) {

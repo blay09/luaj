@@ -75,15 +75,15 @@ class JavaMethod extends JavaMember {
 	}
 
 	public LuaValue call(LuaValue arg) {
-		return invokeMethod(arg.checkuserdata(), LuaValue.NONE);
+		return invokeMethod(arg.checkUserdata(), LuaValue.NONE);
 	}
 
 	public LuaValue call(LuaValue arg1, LuaValue arg2) {
-		return invokeMethod(arg1.checkuserdata(), arg2);
+		return invokeMethod(arg1.checkUserdata(), arg2);
 	}
 	
 	public LuaValue call(LuaValue arg1, LuaValue arg2, LuaValue arg3) {
-		return invokeMethod(arg1.checkuserdata(), LuaValue.varargsOf(arg2, arg3));
+		return invokeMethod(arg1.checkUserdata(), LuaValue.varargsOf(arg2, arg3));
 	}
 	
 	public Varargs invoke(Varargs args) {
@@ -123,15 +123,15 @@ class JavaMethod extends JavaMember {
 		}
 
 		public LuaValue call(LuaValue arg) {
-			return invokeBestMethod(arg.checkuserdata(), LuaValue.NONE);
+			return invokeBestMethod(arg.checkUserdata(), LuaValue.NONE);
 		}
 
 		public LuaValue call(LuaValue arg1, LuaValue arg2) {
-			return invokeBestMethod(arg1.checkuserdata(), arg2);
+			return invokeBestMethod(arg1.checkUserdata(), arg2);
 		}
 		
 		public LuaValue call(LuaValue arg1, LuaValue arg2, LuaValue arg3) {
-			return invokeBestMethod(arg1.checkuserdata(), LuaValue.varargsOf(arg2, arg3));
+			return invokeBestMethod(arg1.checkUserdata(), LuaValue.varargsOf(arg2, arg3));
 		}
 		
 		public Varargs invoke(Varargs args) {

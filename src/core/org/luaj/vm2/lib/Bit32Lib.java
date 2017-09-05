@@ -97,11 +97,11 @@ public class Bit32Lib extends TwoArgFunction {
 
 		public LuaValue call(LuaValue arg1, LuaValue arg2) {
 			switch ( opcode ) {
-			case 0: return Bit32Lib.arshift(arg1.checkint(), arg2.checkint());
-			case 1: return Bit32Lib.lrotate(arg1.checkint(), arg2.checkint());
-			case 2: return Bit32Lib.lshift(arg1.checkint(), arg2.checkint());
-			case 3: return Bit32Lib.rrotate(arg1.checkint(), arg2.checkint());
-			case 4: return Bit32Lib.rshift(arg1.checkint(), arg2.checkint());
+			case 0: return Bit32Lib.arshift(arg1.checkInt(), arg2.checkInt());
+			case 1: return Bit32Lib.lrotate(arg1.checkInt(), arg2.checkInt());
+			case 2: return Bit32Lib.lshift(arg1.checkInt(), arg2.checkInt());
+			case 3: return Bit32Lib.rrotate(arg1.checkInt(), arg2.checkInt());
+			case 4: return Bit32Lib.rshift(arg1.checkInt(), arg2.checkInt());
 			}
 			return NIL;
 		}

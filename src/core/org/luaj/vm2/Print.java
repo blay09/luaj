@@ -418,7 +418,7 @@ public class Print extends Lua {
 				ps.print(STRING_FOR_NULL);
 			else switch ( v.type() ) {
 			case LuaValue.TSTRING: 
-				LuaString s = v.checkstring();
+				LuaString s = v.checkLuaString();
 				ps.print( s.length() < 48?
 						s.tojstring():
 						s.substring(0, 32).tojstring()+"...+"+(s.length()-32)+"b");					

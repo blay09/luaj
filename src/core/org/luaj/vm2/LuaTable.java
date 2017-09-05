@@ -337,10 +337,10 @@ public class LuaTable extends LuaValue implements Metatable {
 	public LuaValue concat(LuaString sep, int i, int j) {
 		Buffer  sb = new Buffer ();
 		if ( i<=j ) {
-			sb.append( get(i).checkstring() );
+			sb.append( get(i).checkLuaString() );
 			while ( ++i<=j ) {
 				sb.append( sep );
-				sb.append( get(i).checkstring() );
+				sb.append( get(i).checkLuaString() );
 			}
 		}
 		return sb.tostring();
@@ -441,7 +441,7 @@ public class LuaTable extends LuaValue implements Metatable {
 	 * @return key,value or none
 	 */
 	public Varargs inext(LuaValue key) {
-		int k = key.checkint() + 1;
+		int k = key.checkInt() + 1;
 		LuaValue v = rawget(k);
 		return v.isnil()? NONE: varargsOf(LuaInteger.valueOf(k),v);
 	}

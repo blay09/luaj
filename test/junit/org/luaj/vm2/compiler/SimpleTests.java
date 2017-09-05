@@ -2,7 +2,7 @@ package org.luaj.vm2.compiler;
 
 import junit.framework.TestCase;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaDouble;
 import org.luaj.vm2.LuaInteger;
 import org.luaj.vm2.LuaValue;
@@ -10,7 +10,7 @@ import org.luaj.vm2.lib.jse.JsePlatform;
 
 public class SimpleTests extends TestCase {
 
-	private Globals globals;
+	private LuaState globals;
 
     protected void setUp() throws Exception {
         super.setUp();

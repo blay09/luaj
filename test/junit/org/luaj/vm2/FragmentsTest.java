@@ -64,7 +64,7 @@ public class FragmentsTest extends TestSuite {
 		public void runFragment( Varargs expected, String script ) {
 			try {
 				String name = getName();
-				Globals globals = JsePlatform.debugGlobals();
+				LuaState globals = JsePlatform.debugGlobals();
 				Reader reader = new StringReader(script);
 				LuaValue chunk ;
 				switch ( TEST_TYPE ) {

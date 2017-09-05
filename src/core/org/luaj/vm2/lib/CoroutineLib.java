@@ -21,7 +21,7 @@
 ******************************************************************************/
 package org.luaj.vm2.lib;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaThread;
 import org.luaj.vm2.LuaValue;
@@ -64,7 +64,7 @@ public class CoroutineLib extends TwoArgFunction {
 
 	static int coroutine_count = 0;
 
-	Globals globals;
+	LuaState globals;
 	
 	/** Perform one-time initialization on the library by creating a table
 	 * containing the library functions, adding that table to the supplied environment,

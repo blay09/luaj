@@ -28,7 +28,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.Lua;
 import org.luaj.vm2.Print;
 import org.luaj.vm2.Prototype;
@@ -138,7 +138,7 @@ public class luac {
 			
 			// process input files
 			try {
-				Globals globals = JsePlatform.standardGlobals();
+				LuaState globals = JsePlatform.standardGlobals();
 				processing = true;
 				for ( int i=0; i<args.length; i++ ) {
 					if ( ! processing || ! args[i].startsWith("-") ) {
@@ -168,7 +168,7 @@ public class luac {
 		}
 	}
 	
-	private void processScript( Globals globals, InputStream script, String chunkname, OutputStream out ) throws IOException {
+	private void processScript(LuaState globals, InputStream script, String chunkname, OutputStream out ) throws IOException {
 		try {
 	        // create the chunk
 			script = new BufferedInputStream(script);

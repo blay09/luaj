@@ -34,7 +34,7 @@ import org.luaj.vm2.server.LuajClassLoader;
 public class LoadOrderTest extends TestCase {
 
 	public void testLoadGlobalsFirst() {
-		Globals g = JsePlatform.standardGlobals();
+		LuaState g = JsePlatform.standardGlobals();
 		assertNotNull(g);
 	}
 

@@ -86,13 +86,13 @@ public class TableLib extends TwoArgFunction {
 			return list.checktable().concat(EMPTYSTRING,1,list.length());
 		}
 		public LuaValue call(LuaValue list, LuaValue sep) {
-			return list.checktable().concat(sep.checkstring(),1,list.length());
+			return list.checktable().concat(sep.checkLuaString(),1,list.length());
 		}
 		public LuaValue call(LuaValue list, LuaValue sep, LuaValue i) {
-			return list.checktable().concat(sep.checkstring(),i.checkint(),list.length());
+			return list.checktable().concat(sep.checkLuaString(),i.checkInt(),list.length());
 		}
 		public LuaValue call(LuaValue list, LuaValue sep, LuaValue i, LuaValue j) {
-			return list.checktable().concat(sep.checkstring(),i.checkint(),j.checkint());
+			return list.checktable().concat(sep.checkLuaString(),i.checkInt(),j.checkInt());
 		}
 	}
 

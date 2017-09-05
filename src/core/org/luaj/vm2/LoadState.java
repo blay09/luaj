@@ -29,7 +29,7 @@ import java.io.InputStream;
 /**
 * Class to undump compiled lua bytecode into a {@link Prototype} instances.
 * <p>
-* The {@link LoadState} class provides the default {@link Globals.Undumper}
+* The {@link LoadState} class provides the default {@link LuaState.Undumper}
 * which is used to undump a string of bytes that represent a lua binary file
 * using either the C-based lua compiler, or luaj's 
 * {@link org.luaj.vm2.compiler.LuaC} compiler.
@@ -41,13 +41,13 @@ import java.io.InputStream;
 * LuaValue chunk = globasl.load("print('hello, world')", "main.lua");
 * chunk.call();
 * } </pre>
-* This should work regardless of which {@link Globals.Compiler} or {@link Globals.Undumper}
+* This should work regardless of which {@link LuaState.Compiler} or {@link LuaState.Undumper}
 * have been installed.
 * <p>
 * By default, when using {@link org.luaj.vm2.lib.jse.JsePlatform} or 
 * {@link org.luaj.vm2.lib.jme.JmePlatform}
 * to construct globals, the {@link LoadState} default undumper is installed
-* as the default {@link Globals.Undumper}. 
+* as the default {@link LuaState.Undumper}.
 * <p>
 * 
 * A lua binary file is created via the {@link org.luaj.vm2.compiler.DumpState} class
@@ -69,26 +69,26 @@ import java.io.InputStream;
 * } </pre>
 * 
 * 
-* More commonly, the {@link Globals.Undumper} may be used to undump them:
+* More commonly, the {@link LuaState.Undumper} may be used to undump them:
 * <pre> {@code
 * Prototype p = globals.loadPrototype(new ByteArrayInputStream(lua_binary_file_bytes), "main.lua", "b");
 * LuaClosure c = new LuaClosure(p, globals);
 * c.call();
 * } </pre>
 * 
-* @see Globals.Compiler
-* @see Globals.Undumper
+* @see LuaState.Compiler
+* @see LuaState.Undumper
 * @see LuaClosure
 * @see LuaFunction
 * @see org.luaj.vm2.compiler.LuaC
 * @see org.luaj.vm2.luajc.LuaJC
-* @see Globals#compiler
-* @see Globals#load(InputStream, String, LuaValue)
+* @see LuaState#compiler
+* @see LuaState#load(InputStream, String, LuaValue)
 */
 public class LoadState {
 
 	/** Shared instance of Globals.Undumper to use loading prototypes from binary lua files */
-	public static final Globals.Undumper instance = new GlobalsUndumper();
+	public static final LuaState.Undumper instance = new GlobalsUndumper();
 	
 	/** format corresponding to non-number-patched lua, all numbers are floats or doubles */
 	public static final int NUMBER_FORMAT_FLOATS_OR_DOUBLES    = 0;
@@ -163,7 +163,7 @@ public class LoadState {
 	private byte[] buf = new byte[512];
 
 	/** Install this class as the standard Globals.Undumper for the supplied Globals */
-	public static void install(Globals globals) {
+	public static void install(LuaState globals) {
 		globals.undumper = instance;
 	}
 	
@@ -435,7 +435,7 @@ public class LoadState {
 		this.is = new DataInputStream( stream );
 	}
 	
-	private static final class GlobalsUndumper implements Globals.Undumper {
+	private static final class GlobalsUndumper implements LuaState.Undumper {
 		public Prototype undump(InputStream stream, String chunkname)
 				throws IOException {
 			return LoadState.undump(stream,  chunkname);

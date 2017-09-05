@@ -24,7 +24,7 @@ package org.luaj.vm2.server;
 import java.io.InputStream;
 import java.io.Reader;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
@@ -46,7 +46,7 @@ import org.luaj.vm2.lib.jse.JsePlatform;
  * @since luaj 3.0.1
  */
 public class DefaultLauncher implements Launcher {
-	protected Globals g;
+	protected LuaState g;
 
 	public DefaultLauncher() {
 		g = JsePlatform.standardGlobals();

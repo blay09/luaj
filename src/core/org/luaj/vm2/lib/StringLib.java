@@ -627,7 +627,7 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class len extends OneArgFunction {
 		public LuaValue call(LuaValue arg) {
-			return arg.checkstring().len();
+			return arg.checkLuaString().len();
 		}
 	}
 
@@ -640,7 +640,7 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class lower extends OneArgFunction {
 		public LuaValue call(LuaValue arg) {
-			return valueOf( arg.checkjstring().toLowerCase() );
+			return valueOf( arg.checkString().toLowerCase() );
 		}
 	}
 
@@ -684,7 +684,7 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class reverse extends OneArgFunction {
 		public LuaValue call(LuaValue arg) {
-			LuaString s = arg.checkstring();
+			LuaString s = arg.checkLuaString();
 			int n = s.length();
 			byte[] b = new byte[n];
 			for ( int i=0, j=n-1; i<n; i++, j-- )
@@ -734,7 +734,7 @@ public class StringLib extends TwoArgFunction {
 	 */
 	static final class upper extends OneArgFunction {
 		public LuaValue call(LuaValue arg) {
-			return valueOf(arg.checkjstring().toUpperCase());
+			return valueOf(arg.checkString().toUpperCase());
 		}
 	}
 	

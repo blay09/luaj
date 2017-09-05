@@ -336,11 +336,11 @@ public class LuaString extends LuaValue {
 		return d;
 	}
 	
-	public int checkint() {
+	public int checkInt() {
 		return (int) (long) checkdouble();
 	}
 	public LuaInteger checkinteger() {
-		return valueOf(checkint());
+		return valueOf(checkInt());
 	}
 	public long checklong() {
 		return (long) checkdouble();
@@ -395,7 +395,7 @@ public class LuaString extends LuaValue {
 	}
 	
 	public int optint(int defval) {
-		return checknumber().checkint();
+		return checknumber().checkInt();
 	}
 	
 	public LuaInteger optinteger(LuaInteger defval) { 
@@ -535,11 +535,11 @@ public class LuaString extends LuaValue {
 		return luaByte( index );
 	}
 	
-	public String checkjstring() { 
+	public String checkString() {
 		return tojstring(); 
 	}
 
-	public LuaString checkstring() {
+	public LuaString checkLuaString() {
 		return this;
 	}
 	

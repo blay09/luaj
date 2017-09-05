@@ -225,13 +225,13 @@ public class MathLib extends TwoArgFunction {
 			return valueOf( random.nextDouble() );
 		}
 		public LuaValue call(LuaValue a) {
-			int m = a.checkint();
+			int m = a.checkInt();
 			if (m<1) argerror(1, "interval is empty");
 			return valueOf( 1 + random.nextInt(m) );
 		}
 		public LuaValue call(LuaValue a, LuaValue b) {
-			int m = a.checkint();
-			int n = b.checkint();
+			int m = a.checkInt();
+			int n = b.checkInt();
 			if (n<m) argerror(2, "interval is empty");
 			return valueOf( m + random.nextInt(n+1-m) );
 		}

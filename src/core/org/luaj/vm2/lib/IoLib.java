@@ -25,7 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaString;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -231,7 +231,7 @@ public class IoLib extends TwoArgFunction {
 
 	LuaTable filemethods;
 	
-	protected Globals globals;
+	protected LuaState globals;
 	
 	public LuaValue call(LuaValue modname, LuaValue env) {
 		globals = env.checkglobals();
@@ -338,7 +338,7 @@ public class IoLib extends TwoArgFunction {
 	//	io.input([file]) -> file
 	public Varargs _io_input(LuaValue file) {
 		infile = file.isnil()? input(): 
-				file.isstring()? ioopenfile(FTYPE_NAMED, file.checkjstring(),"r"):
+				file.isstring()? ioopenfile(FTYPE_NAMED, file.checkString(),"r"):
 				checkfile(file);
 		return infile;
 	}
@@ -346,7 +346,7 @@ public class IoLib extends TwoArgFunction {
 	// io.output(filename) -> file
 	public Varargs _io_output(LuaValue filename) {
 		outfile = filename.isnil()? output(): 
-				  filename.isstring()? ioopenfile(FTYPE_NAMED, filename.checkjstring(),"w"):
+				  filename.isstring()? ioopenfile(FTYPE_NAMED, filename.checkString(),"w"):
 				  checkfile(filename);
 		return outfile;
 	}
@@ -501,7 +501,7 @@ public class IoLib extends TwoArgFunction {
 					vi = freadbytes(f,ai.toint());
 					break item;
 				case LuaValue.TSTRING:
-					fmt = ai.checkstring();
+					fmt = ai.checkLuaString();
 					if ( fmt.m_length == 2 && fmt.m_bytes[fmt.m_offset] == '*' ) {
 						switch ( fmt.m_bytes[fmt.m_offset+1] ) {
 						case 'n': vi = freadnumber(f); break item;

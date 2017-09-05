@@ -21,10 +21,8 @@
  ******************************************************************************/
 package org.luaj.vm2.lib.jme;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LoadState;
-import org.luaj.vm2.LuaThread;
-import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.compiler.LuaC;
 import org.luaj.vm2.lib.BaseLib;
 import org.luaj.vm2.lib.Bit32Lib;
@@ -72,7 +70,7 @@ import org.luaj.vm2.lib.TableLib;
  * <p>
  * The standard globals will contain all standard libraries in their JME flavors:
  * <ul>
- * <li>{@link Globals}</li>
+ * <li>{@link LuaState}</li>
  * <li>{@link BaseLib}</li>
  * <li>{@link PackageLib}</li>
  * <li>{@link Bit32Lib}</li>
@@ -90,7 +88,7 @@ import org.luaj.vm2.lib.TableLib;
  * <p>
  * The class ensures that initialization is done in the correct order.  
  * 
- * @see Globals
+ * @see LuaState
  * @see org.luaj.vm2.lib.jse.JsePlatform
  */
 public class JmePlatform {
@@ -103,8 +101,8 @@ public class JmePlatform {
 	 * @see org.luaj.vm2.lib.jse.JsePlatform
 	 * @see org.luaj.vm2.lib.jme.JmePlatform
 	 */
-	public static Globals standardGlobals() {
-		Globals globals = new Globals();
+	public static LuaState standardGlobals() {
+		LuaState globals = new LuaState();
 		globals.load(new BaseLib());
 		globals.load(new PackageLib());
 		globals.load(new Bit32Lib());
@@ -127,8 +125,8 @@ public class JmePlatform {
 	 * @see org.luaj.vm2.lib.jme.JmePlatform
 	 * @see DebugLib
 	 */
-	public static Globals debugGlobals() {
-		Globals globals = standardGlobals();
+	public static LuaState debugGlobals() {
+		LuaState globals = standardGlobals();
 		globals.load(new DebugLib());
 		return globals;
 	}

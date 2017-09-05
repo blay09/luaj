@@ -26,7 +26,7 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaState;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Print;
 import org.luaj.vm2.Prototype;
@@ -39,7 +39,7 @@ public class TestLuaJC {
 	// build path.  This allows the debugger to find the file when stepping into the function.
 	public static String filename = "perf/nsieve.lua";
 
-	static Globals globals;
+	static LuaState globals;
 	
 	public static void main(String[] args) throws Exception {
 		if (args.length > 0)

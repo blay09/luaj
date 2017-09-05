@@ -200,7 +200,7 @@ public class LuaInteger extends LuaNumber {
 	// string comparison
 	public int strcmp( LuaString rhs )      { typerror("attempt to compare number with string"); return 0; }
 	
-	public int checkint() { 
+	public int checkInt() {
 		return v; 
 	}
 	public long checklong() {
@@ -209,10 +209,10 @@ public class LuaInteger extends LuaNumber {
 	public double checkdouble() {
 		return v;
 	}
-	public String checkjstring() { 
+	public String checkString() {
 		return String.valueOf(v); 
 	}
-	public LuaString checkstring() { 
+	public LuaString checkLuaString() {
 		return valueOf( String.valueOf(v) ); 
 	}
 
